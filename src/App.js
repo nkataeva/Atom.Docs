@@ -10,6 +10,7 @@ import { SignApplication } from './sign';
 import { Signing } from './sign/signing';
 import { ShowApplication } from './application/show';
 import { Creature } from './application/creature';
+import { Request } from './request';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/signing' element={<Signing />} />
         <Route path='/show' element={<ShowApplication />} />
         <Route path='/creature' element={<Creature />} />
+        <Route path='/request' element={<Request />} />
       </Routes>
     </Router>
   );
