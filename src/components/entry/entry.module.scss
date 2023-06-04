@@ -1,0 +1,18 @@
+@import '../../styles/vars.scss';
+
+.form {
+    color: $white;
+    background-color: $light-blue;
+    display: flex;
+    flex-direction: column;
+    gap: $gap*2;
+    padding: $gap*2 $gap*3;
+    align-items: center;
+    border-radius: 25px;
+    margin-top: 200px;
+    button {
+        background-color: $dark-blue;
+        padding: $gap $gap*3;
+        border-radius: 50px;
+    }
+}

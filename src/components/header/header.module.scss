@@ -1,0 +1,18 @@
+@import "../../styles/vars.scss";
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: $gap;
+    gap: calc($gap/2);
+    background-color:  $light-blue;
+    color: $blue;
+    border-bottom: 2px solid $dark-blue;
+    a {
+        height: 50px;
+    }
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}

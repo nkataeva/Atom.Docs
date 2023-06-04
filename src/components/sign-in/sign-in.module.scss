@@ -1,0 +1,27 @@
+@import '../../styles/vars.scss';
+
+.form {
+    background-color: $light-blue;
+    display: flex;
+    flex-direction: column;
+    gap: $gap*2;
+    padding: $gap*2 $gap*3;
+    align-items: center;
+    border-radius: 25px;
+    margin-top: 200px;
+    button {
+        background-color: $dark-blue;
+        padding: $gap $gap*3;
+        border-radius: 50px;
+        color: $white;
+    }
+    input {
+        background-color: $white;
+        padding: calc($gap/2);
+        color: black;
+    }
+}
+
+.header {
+    color: $blue;
+}

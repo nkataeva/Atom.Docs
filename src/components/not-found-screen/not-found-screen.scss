@@ -1,0 +1,14 @@
+@import '../../styles/vars.scss';
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $gap;
+    margin-top: 200px;
+}
+
+.error__link {
+    text-decoration: none;
+}
