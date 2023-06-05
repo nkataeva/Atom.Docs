@@ -10,7 +10,7 @@ const Entry = () => {
             <Link to={APPRoute.REGISTRATION}>
                 <button type="button">Регистрация</button>
             </Link>
-            <Link to={APPRoute.SIGN_IN}>
+            <Link to={APPRoute.LOGIN}>
                 <button type="button">Авторизация</button>
             </Link>
         </div>

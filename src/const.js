@@ -1,5 +1,10 @@
 export const APPRoute = {
-    MAIN: `/`,
+    ENTRY: `/`,
     REGISTRATION: '/registration',
-    SIGN_IN: '/signin',
+    LOGIN: '/login',
+    MAIN: '/main',
+    SIGN: '/sign',
+    SIGNING: '/signing',
+    SHOW:'/show',
+    CREATURE:'/creature'
 };
