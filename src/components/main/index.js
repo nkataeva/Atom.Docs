@@ -6,6 +6,7 @@ export function Main() {
         <div>
             <h1>Main page</h1>
             <Link to='/creature'>Создать заявку</Link>
+            <Link to='/sign'>Заявки на подписание</Link>
         </div>
     )
 }

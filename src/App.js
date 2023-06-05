@@ -1,16 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
-import { Greeting } from './auth/greeting';
-import { Main } from './main';
-import { Login } from './auth/login';
-import { Registration } from './auth/registration';
-import { SignApplication } from './sign';
-import { Signing } from './sign/signing';
-import { ShowApplication } from './application/show';
-import { Creature } from './application/creature';
+
 import { Request } from './request';
+
+import { Greeting } from './components/auth/greeting';
+import { Main } from './components/main';
+import { Login } from './components/auth/login';
+import { Registration } from './components/auth/registration';
+import { SignApplication } from './components/sign';
+import { Signing } from './components/sign/signing';
+import { ShowApplication } from './components/application/show';
+import { Creature } from './components/application/creature';
+
 
 function App() {
   return (

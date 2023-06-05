@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import PDFViewer from './pdf_lib'
-import {CreatePDF} from "./CreatePDF";
+import { CreatePDF } from "./CreatePDF";
 
 export function Creature() {
     return (

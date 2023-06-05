@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export function SignApplication() {
     return (
         <div>
-            <Link to="/sign" activeStyle>
-                подписать
+            <Link to="/signing" activeStyle>
+                Подписать
             </Link>
-            <h1>SignApplication page</h1>
+            <h1>Список заявок на подписание</h1>
         </div>
     )
 }
