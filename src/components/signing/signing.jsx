@@ -5,7 +5,7 @@ const Signing = () => {
   return (
     <div className={styles.form}>
       <h3>Подписание</h3>
-      <p>Кто направил </p>
+      <p>Направил </p>
       <div className={styles.showPDF}>Просмотр PDF</div>
 
       <div className={styles.comm}>

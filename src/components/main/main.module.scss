@@ -1,15 +1,23 @@
 @import '../../styles/vars.scss';
 
-.form {
-    color: $white;
+.main {
     display: flex;
-    gap: $gap*2;
-    padding: $gap*2 $gap*3;
+    flex-direction: column;
+    justify-self: center;
     align-items: center;
-    margin-top: 200px;
-    button {
-        background-color: $dark-blue;
-        padding: $gap $gap*3;
-        border-radius: 50px;
+
+    .form {
+        color: $white;
+        display: flex;
+        gap: $gap*2;
+        padding-top: $gap*2;
+        align-items: center;
+
+        button {
+            background-color: $dark-blue;
+            padding: $gap $gap*3;
+            border-radius: 50px;
+        }
     }
+
 }
