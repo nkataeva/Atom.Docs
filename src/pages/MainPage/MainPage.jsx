@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./main.module.scss";
-import Table from "../Table/Table";
-import testData from "../sign/mock_data";
-import Search from "../search/search";
+import styles from "./MainPage.module.scss";
+import Table from "../../components/Table/Table";
+import testData from "../ForSigningPage/mock_data";
+import Search from "../../components/Search/Search";
 
-const Main = () => {
+const MainPage = () => {
   const [inputValue, setInputValue] = React.useState("");
 
   const filteredData = testData?.filter((value) => {
@@ -32,4 +32,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

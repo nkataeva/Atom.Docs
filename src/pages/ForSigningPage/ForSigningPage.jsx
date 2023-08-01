@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./sign.module.scss";
+import styles from "./ForSigningPage.module.scss";
 import testData from "./mock_data";
-import Table from "../Table/Table";
-import Search from "../search/search";
+import Table from "../../components/Table/Table";
+import Search from "../../components/Search/Search";
 
-export function SignApplication() {
+export function ForSigningPage() {
 
   const [inputValue, setInputValue] = React.useState("");
 
@@ -20,4 +20,4 @@ export function SignApplication() {
   );
 }
 
-export default SignApplication;
+export default ForSigningPage;
