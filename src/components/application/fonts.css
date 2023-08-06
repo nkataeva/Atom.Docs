@@ -1,0 +1,7 @@
+/* fonts.css */
+@font-face {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./ARIAL.TTF') format('truetype');
+}

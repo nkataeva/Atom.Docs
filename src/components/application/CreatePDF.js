@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PDFViewer, PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import styles from "./CreatePDF.module.scss";
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
-
+import PdfTemplate  from './TestPDF'
 export function Preview() {
     const [value, setValue] = useState(false)
 
@@ -147,9 +147,13 @@ export const CreatePDF = ({ onChange }, { profile }) => {
     };
 
     return (
+
         <div className={styles.MainCLassPDF}>
+
             <div className={styles.container}>
                 <div className={styles.header}>Создание заявки</div>
+                <PdfTemplate/>
+
                 <ul className={styles.input_form}>
                     <li>
                         <label>Название</label>
@@ -164,9 +168,9 @@ export const CreatePDF = ({ onChange }, { profile }) => {
                         <label>Тип заявки</label>
                         <select name="name" className={styles.listbox} size="1"
                             onChange={onChangeTypeRequest}>
-                            {/* <option value="Type requests 1">Тип какой то 1</option>
+                             <option value="Type requests 1">Тип какой то 1</option>
                             <option value="Тип какой то 2">Тип какой то 2</option>
-                            <option value="Тип какой то 3">Тип какой то 3</option> */}
+                            <option value="Тип какой то 3">Тип какой то 3</option>
                             <option value="Type requests 1">Type 1</option>
                             <option value="Type requests 2">Type 2</option>
                             <option value="Type requests 3">Type 3</option>
@@ -177,9 +181,9 @@ export const CreatePDF = ({ onChange }, { profile }) => {
                         <label>Тип шаблона</label>
                         <select name="name" className={styles.listbox} size="1"
                             onChange={onChangeTypeTemplate}>
-                            {/* <option value="Type Template 1">Тип шаблона какой то 1</option>
+                             <option value="Type Template 1">Тип шаблона какой то 1</option>
                             <option value="Тип шаблона какой то 2">Тип шаблона какой то 2</option>
-                            <option value="Тип шаблона какой то 3">Тип шаблона какой то 3</option> */}
+                            <option value="Тип шаблона какой то 3">Тип шаблона какой то 3</option>
                             <option value="Type Template 1">Template 1</option>
                             <option value="Type Template 2">Template 2</option>
                             <option value="Type Template 3">Template 3</option>
