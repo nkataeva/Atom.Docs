@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PDFViewer, PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFDocument, rgb } from 'pdf-lib';
 
-const PdfTemplate = () => {
+const PdfTemplate = ({ formNameProp, field1Prop, field2Prop }) => {
   const [name, setName] = useState('');
   const [field1, setField1] = useState('');
   const [field2, setField2] = useState('');
@@ -31,38 +31,19 @@ const PdfTemplate = () => {
   };
 
   return (
-    <div>
-      <div>
-        <label>Name:</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <label>Field 1:</label>
-        <input type="text" value={field1} onChange={(e) => setField1(e.target.value)} />
-      </div>
-      <div>
-        <label>Field 2:</label>
-        <input type="text" value={field2} onChange={(e) => setField2(e.target.value)} />
-      </div>
-      {/* ... (добавьте другие поля, если нужно) */}
-
       <PDFViewer width={600} height={800}>
         <Document>
           <Page size="A4">
             <View style={styles.container}>
               <Text style={styles.title}>Form Data:</Text>
-              <Text style={styles.text}>Name: {name}</Text>
-              <Text style={styles.text}>Field 1: {field1}</Text>
-              <Text style={styles.text}>Field 2: {field2}</Text>
+              <Text style={styles.text}>Name: {formNameProp}</Text>
+              <Text style={styles.text}>Field 1: {field1Prop}</Text>
+              <Text style={styles.text}>Field 2: {field2Prop}</Text>
               {/* ... (добавьте другие поля, если нужно) */}
             </View>
           </Page>
         </Document>
       </PDFViewer>
-      <PDFDownloadLink document={<Document />} fileName="generated.pdf" onClick={generatePdf}>
-        <button>Generate PDF</button>
-      </PDFDownloadLink>
-    </div>
   );
 };
 
@@ -81,4 +62,33 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PdfTemplate;
+const PdfGenerator = () => {
+  const [formData, setFormData] = React.useState([
+    { formName: 'Form 1', field1: 'Field 1 Value 1', field2: 'Field 2 Value 1' },
+    { formName: 'Form 2', field1: 'Field 1 Value 2', field2: 'Field 2 Value 2' },
+    // Добавьте другие формы в массив, если нужно
+  ]);
+
+  const [selectedForm, setSelectedForm] = React.useState(formData[0]);
+
+  const handleFormChange = (e) => {
+    const selectedFormName = e.target.value;
+    const form = formData.find((item) => item.formName === selectedFormName);
+    setSelectedForm(form);
+  };
+
+  return (
+      <div>
+        <select value={selectedForm.formName} onChange={handleFormChange}>
+          {formData.map((form) => (
+              <option key={form.formName} value={form.formName}>
+                {form.formName}
+              </option>
+          ))}
+        </select>
+        <PdfTemplate formNameProp={selectedForm.formName} field1Prop={selectedForm.field1} field2Prop={selectedForm.field2} />
+      </div>
+  );
+};
+
+export default PdfGenerator;

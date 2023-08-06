@@ -3,6 +3,7 @@ import { PDFViewer, PDFDownloadLink, Page, Text, View, Document, StyleSheet } fr
 import styles from "./CreatePDF.module.scss";
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import PdfTemplate  from './TestPDF'
+import PdfGenerator from "./TestPDF";
 export function Preview() {
     const [value, setValue] = useState(false)
 
@@ -152,7 +153,7 @@ export const CreatePDF = ({ onChange }, { profile }) => {
 
             <div className={styles.container}>
                 <div className={styles.header}>Создание заявки</div>
-                <PdfTemplate/>
+                <PdfGenerator/>
 
                 <ul className={styles.input_form}>
                     <li>
