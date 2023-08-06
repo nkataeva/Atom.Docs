@@ -9,9 +9,11 @@ const Paths = {
   Base: '/api',
   Users: {
     Base: '/users',
-    Get: '/all',
-    Add: '/add',
-    Update: '/update',
+    Register: '/register',
+    Login: '/login',
+
+    Get: '/all',    
+    Update: '/update/:id',
     Delete: '/delete/:id',
   },
 };

@@ -1,8 +1,6 @@
-
-
 import jsonfile from 'jsonfile';
 
-import { IUser } from '@src/models/User';
+import { IUser } from '@src/models/UserMock';
 
 
 // **** Variables **** //
@@ -32,7 +30,6 @@ function openDb(): Promise<IDb> {
 function saveDb(db: IDb): Promise<void> {
   return jsonfile.writeFile((__dirname + '/' + DB_FILE_NAME), db);
 }
-
 
 // **** Export default **** //
 

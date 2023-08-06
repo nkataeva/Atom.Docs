@@ -20,6 +20,7 @@ import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 import { NodeEnvs } from '@src/constants/misc';
 import { RouteError } from '@src/other/classes';
 
+import { sequelize } from '@src/sequelize';
 
 // **** Variables **** //
 
@@ -64,6 +65,9 @@ app.use((
   return res.status(status).json({ error: err.message });
 });
 
+
+sequelize.sync({alter: true, force: true})
+console.log('[OK] Sequelize synched')
 
 // ** Front-End Content ** //
 

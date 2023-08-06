@@ -2,7 +2,6 @@ import { Router } from 'express';
 import jetValidator from 'jet-validator';
 
 import Paths from './constants/Paths';
-import User from '@src/models/User';
 import UserRoutes from './UserRoutes';
 
 
@@ -22,17 +21,17 @@ userRouter.get(
   UserRoutes.getAll,
 );
 
-// Add one user
+// Register new user
 userRouter.post(
-  Paths.Users.Add,
-  validate(['user', User.isUser]),
-  UserRoutes.add,
+  Paths.Users.Register,
+  validate('login', 'email', 'password', 'fio'),
+  UserRoutes.register,
 );
 
 // Update one user
 userRouter.put(
   Paths.Users.Update,
-  validate(['user', User.isUser]),
+  validate('login', 'email', 'password', 'fio', ['id', 'number', 'params']),
   UserRoutes.update,
 );
 
@@ -42,6 +41,13 @@ userRouter.delete(
   validate(['id', 'number', 'params']),
   UserRoutes.delete,
 );
+
+// Login user 
+userRouter.post(
+  Paths.Users.Login,
+  validate('login', 'password'),
+  UserRoutes.login,
+)
 
 // Add UserRouter
 apiRouter.use(Paths.Users.Base, userRouter);
