@@ -11,6 +11,7 @@ import {
 // import RobotoRegular from "../../fonts/Roboto-Regular.ttf";
 import YsabeauSCRegular from "../../fonts/YsabeauSC/YsabeauSC-Regular.ttf";
 import moment from 'moment'; 
+import './styleinput.css'
 
 Font.register({
   family: "Roboto",
@@ -65,21 +66,21 @@ const NewPDF = ({ formNameProp, captionOrganization, userFIO, user_job_title}) =
   <div>
     <div>
     {formNameProp === 'Заявка на информационный обмен' && (
-      <div>
-        <text>Введите информацию про ваши тезисы : </text>
-        <input type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
+      <div class="text-field">
+        <label class="text-field__label">Введите информацию про ваши тезисы :</label>
+        <input class="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
       </div>
       )}
       {formNameProp === 'Заявка для направления в командировку/для направления в служебную поездку' && (
-      <div>
-        <text>Введите информацию про ваше место назначения : </text>
-        <input type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
+      <div class="text-field">
+        <label class="text-field__label">Введите информацию про ваше место назначения : </label>
+        <input  class="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
         <p/>
-        <text>Введите информацию про количество календарных дней для пребывания : </text>
-        <input type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
+        <label class="text-field__label">Введите информацию про количество календарных дней для пребывания :  </label>
+        <input  class="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
         <p/>
-        <text>Введите информацию про цель поездки: </text>
-        <input type="text" value={texttarget} onChange={e => setTexttarget(e.target.value)} />
+        <label class="text-field__label">Введите информацию про цель поездки:  </label>
+        <input  class="text-field__input" type="text" value={texttarget} onChange={e => setTexttarget(e.target.value)} />
       </div>
       )}
     </div>
