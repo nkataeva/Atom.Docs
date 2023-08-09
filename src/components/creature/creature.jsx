@@ -1,5 +1,5 @@
 import { CreatePDF } from "../application/CreatePDF";
-import NewPDF from "../pdf/newPdf";
+import PdfGenerator from "../pdf/newPdf";
 
 const Creature = () => {
   return (
@@ -7,7 +7,7 @@ const Creature = () => {
       {/* <Link to='/creature' activeStyle></Link>
             <h1>Creature page</h1> */}
       {/* <CreatePDF /> */}
-      <NewPDF />
+      <PdfGenerator />
     </div>
   );
 };
