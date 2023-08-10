@@ -43,130 +43,175 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewPDF = (props) => {
-  const [name, setName] = useState('');
-  const [field1, setField1] = useState('');
-  const [field2, setField2] = useState('');
+const InfoExchangeBlock = ({ textinput, textfactory,content, justification, userName }) => (
+  <View>
+    <Text style={styles.header}>Такому - то</Text>
+    <Text style={styles.header}>Иванову И.И.</Text>
+    <Text style={styles.header}>от (должность струдника) {userName}</Text>
+    <Text style={styles.header}> {userName}</Text>
+    <Text style={styles.title}>Заявка на информационный обмен</Text>
+    <Text style={styles.text}>Прошу предоставить мне разрешение на информационный обмен с организацией {textfactory} с представленными тезисами : {textinput}</Text>
+    <Text style={styles.text}>Содержание: {content}</Text>
+    <Text style={styles.text}>Обоснованием для обмена считать : {justification}</Text>
+  </View>
+);
 
-  const[textinput,setTextinput]= useState('');
-  const[textDayCount,setTextDayCount]= useState(7);
-  const[texttarget,setTexttarget]= useState('');
 
- 
-  let captionFactory=props.captionFactory
-  let userName=props.userName
 
-  //для Заявки направления в командировку
+const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, texttarget }) => {
   const formatDate = (date) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return date.toLocaleDateString('ru-RU', options);
   };
 
-  
   const today = new Date();
   const futureDate = new Date();
-  futureDate.setDate(futureDate.getDate() + parseInt(textDayCount)); // 
+  futureDate.setDate(futureDate.getDate() + parseInt(textDayCount));
 
-  return(
-  <div>
-    <div>
-    {props.captionRequest === 'Заявка на информационный обмен' && (
-      <div class="text-field">
-        <label class="text-field__label">Введите информацию про ваши тезисы :</label>
-        <input class="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
-      </div>
-      )}
-      {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
-      <div class="text-field">
-        <label class="text-field__label">Введите информацию про ваше место назначения : </label>
-        <input  class="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
-        <p/>
-        <label class="text-field__label">Введите информацию про количество календарных дней для пребывания :  </label>
-        <input  class="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
-        <p/>
-        <label class="text-field__label">Введите информацию про цель поездки:  </label>
-        <input  class="text-field__input" type="text" value={texttarget} onChange={e => setTexttarget(e.target.value)} />
-      </div>
-      )}
-    </div>
-    <div>
-    <PDFViewer width={600} height={300}>
-    <Document>
-      <Page size="A4">
-            <View style={styles.container}>
+  return (
+    <View>
+      <Text style={styles.header}>Такому - то</Text>
+      <Text style={styles.header}>Иванову И.И.</Text>
+      <Text style={styles.header}>от (должность струдника) {userName}</Text>
+      <Text style={styles.header}> {userName}</Text>
+      
+      <Text style={styles.title}>Заявка для направления в командировку/для направления в служебную поездку</Text>
+      <Text style={styles.text}>Прошу отправить меня в командировку в организацию " {captionFactory}" , находящуюся по адресу {textinput},</Text>
+      
+      <Text style={styles.text}>сроком на {textDayCount} календарных дней , с {formatDate(today)} по {formatDate(futureDate)}</Text>
+      <Text style={styles.text}>Обоснованием для служебной поездки является : {texttarget}</Text>
+    </View>
+  );
+};
+const VacationBlock = ({ userName ,textDayCount}) => {
+  const formatDate = (date) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return date.toLocaleDateString('ru-RU', options);
+  };
 
-            {props.captionRequest === 'Заявка на информационный обмен' && (
-              <div>
-                <Text style={styles.title}>Заявка на информационный обмен</Text>
-                <Text style={styles.text}>Тезисы, содержащие информацию: {textinput}</Text>
-              </div>
-              )}
-             {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
-              <div>
-                <Text style={styles.header}> Такому - то</Text>
-                <Text style={styles.header}> Иванову И.И.</Text>
-                <Text style={styles.title}>Заявка для направления в командировку/для направления в служебную поездку</Text>
-                <Text style={styles.text}>Наименование организации: {captionFactory}</Text>
-                <Text style={styles.text}>Фамилия, имя, отчество сотрудника : {userName}</Text>
-                <Text style={styles.text}>Долнжость сотрудника : {userName}</Text>
-                <Text style={styles.text}>Место назначения : {textinput}</Text>
-                <Text style={styles.text}>Сроком на {textDayCount} календарных дней</Text>
-                <Text style={styles.text}>с {formatDate(today)} по {formatDate(futureDate)}</Text>
-                <Text style={styles.text}>Цель поездки : {texttarget} </Text>
+  const today = new Date();
+  const futureDate = new Date();
+  futureDate.setDate(futureDate.getDate() + parseInt(textDayCount));
 
-              </div>
-              )}
-              {props.captionRequest === 'Заявка на предоставление отпуска' && (
-              <Text style={styles.title}>Заявка на предоставление отпуска</Text>
-              )}
-            </View>
-          </Page>
-    </Document>
-      </PDFViewer>
-    </div>
-  </div>);
+  return (
+    <View>
+      <Text style={styles.header}>Такому - то</Text>
+      <Text style={styles.header}>Иванову И.И.</Text>
+      <Text style={styles.header}>от (должность струдника) {userName}</Text>
+      <Text style={styles.header}> {userName}</Text>
+
+      <Text style={styles.title}>Заявка на предоставление отпуска</Text>
+      <Text style={styles.text}>Прошу предоставить мне отпуск сроком на {textDayCount} календарных дней , с {formatDate(today)} по {formatDate(futureDate)}</Text>
+      
+    </View>
+  );
 };
 
-const PdfGenerator = ( userName,
-  chief,
-  captionFactory,
-  content,
-  justification,
-  status
-                      ) => {
-                        
-                        console.log("in PdfGenerator - "+userName)
-  const [typeTemplate, setTypeTemplatea] = React.useState([
-    { 
-      captionRequest: 'Заявка на информационный обмен', 
-      userName: {userName} ,
-      chief: {chief}, 
-      captionFactory: {captionFactory}, 
-      content: {content}, 
-      justification: {justification}, 
-      status: {status}, 
-    },
-    { 
-      captionRequest: 'Заявка для направления в командировку/для направления в служебную поездку', 
-      userName: {userName} ,
-      chief: {chief}, 
-      captionFactory: {captionFactory}, 
-      content: {content}, 
-      justification: {justification}, 
-      status: {status}, 
-    },
-    { 
-      captionRequest: 'Заявка на предоставление отпуска',
-      userName: {userName} ,
-      chief: {chief}, 
-      captionFactory: {captionFactory}, 
-      content: {content}, 
-      justification: {justification}, 
-      status: {status}, 
-    },
-  ]);
 
-  const [selectedForm, setSelectedForm] = React.useState(typeTemplate[0]);
+const NewPDF = (props) => {
+  const [textinput, setTextinput] = useState('');
+  const [textfactory, setTextfactory] = useState('');
+  const [textDayCount, setTextDayCount] = useState(7);
+  const [texttarget, setTexttarget] = useState('');
+  const [content, setContent] = useState(''); 
+  const [justification, setJustification] = useState('');
+
+  const [vacationStartDate, setVacationStartDate] = useState('');
+  const [vacationEndDate, setVacationEndDate] = useState('');
+  const [vacationType, setVacationType] = useState('');
+  const [vacationReason, setVacationReason] = useState('');
+  return (
+    <div>
+      <div>
+        {props.captionRequest === 'Заявка на информационный обмен' && (
+          <div className="text-field">
+            <label className="text-field__label">Введите информацию про ваше место назначения (адрес организации) :</label>
+            <input className="text-field__input" type="text" value={textfactory} onChange={e => setTextfactory(e.target.value)} />
+            <p />
+            <label className="text-field__label">Введите информацию про ваши тезисы :</label>
+            <input className="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
+            <p/>
+            <label className="text-field__label">Введите содержание :</label>
+            <input className="text-field__input" type="text" value={content} onChange={e => setContent(e.target.value)} />
+            <p/>
+            <label className="text-field__label">Введите обоснование :</label>
+            <input className="text-field__input" type="text" value={justification} onChange={e => setJustification(e.target.value)} />
+          </div>
+        )}
+        {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
+          <div className="text-field">
+            <label className="text-field__label">Введите информацию про ваше место назначения (адрес организации) :</label>
+            <input className="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
+            <p />
+            <label className="text-field__label">Введите информацию про количество календарных дней для пребывания :</label>
+            <input className="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
+            <p />
+            <label className="text-field__label">Введите информацию про цель поездки:</label>
+            <input className="text-field__input" type="text" value={texttarget} onChange={e => setTexttarget(e.target.value)} />
+          </div>
+        )}
+        {props.captionRequest === 'Заявка на предоставление отпуска' && (
+          <div className="text-field">
+            <label className="text-field__label">Введите информацию про начало отпуска:</label>
+            <input className="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
+            <p />
+          </div>
+        )}
+      </div>
+      <div>
+        <PDFViewer width={600} height={300}>
+          <Document>
+            <Page size="A4">
+              <View style={styles.container}>
+              {props.captionRequest === 'Заявка на информационный обмен' && (
+                  <InfoExchangeBlock
+                    textfactory={textfactory}
+                    textinput={textinput}
+                    content={content}
+                    justification={justification}
+                    userName={props.userName}
+                  />
+                )}
+
+                {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
+                  <BusinessTripBlock
+                    captionFactory={props.captionFactory}
+                    userName={props.userName}
+                    textinput={textinput}
+                    textDayCount={textDayCount}
+                    texttarget={texttarget}
+                  />
+                )}
+                {props.captionRequest === 'Заявка на предоставление отпуска' && (
+                  <VacationBlock
+                    startDate={props.startDate}
+                  />
+                )}
+              </View>
+            </Page>
+          </Document>
+        </PDFViewer>
+      </div>
+    </div>
+  );
+};
+
+
+const PdfGenerator = ({ obj }) => {
+  const { userName, chief, captionFactory, content, justification, status } = obj;
+const typeTemplate = [
+    {
+      captionRequest: 'Заявка на информационный обмен',
+    },
+    {
+      captionRequest: 'Заявка для направления в командировку/для направления в служебную поездку',
+    },
+    {
+      captionRequest: 'Заявка на предоставление отпуска',
+    },
+  ];
+
+  const [selectedForm, setSelectedForm] = useState(typeTemplate[0]);
 
   const handleFormChange = (e) => {
     const selectedFormName = e.target.value;
@@ -179,20 +224,21 @@ const PdfGenerator = ( userName,
       <div>
         <select value={selectedForm.captionRequest} onChange={handleFormChange}>
           {typeTemplate.map((form) => (
-              <option key={form.captionRequest} value={form.captionRequest}>
-                {form.captionRequest}
-              </option>
+            <option key={form.captionRequest} value={form.captionRequest}>
+              {form.captionRequest}
+            </option>
           ))}
         </select>
       </div>
       <div>
-        <NewPDF captionRequest ={selectedForm?.captionRequest} 
-         userName = {selectedForm?.userName} 
-        chief ={selectedForm?.chief}  
-        captionFactory = {selectedForm?.captionFactory}
-        content = {selectedForm?.content}
-        justification = {selectedForm?.justification}
-        status = {selectedForm?.status} 
+        <NewPDF
+          captionRequest={selectedForm.captionRequest}
+          userName={userName}
+          chief={chief}
+          captionFactory={captionFactory}
+          content={content}
+          justification={justification}
+          status={status}
         />
       </div>
     </div>
