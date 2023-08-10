@@ -1,9 +1,9 @@
 import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
 import UserService from '@src/services/UserService';
-import { ILoginData, IUserData } from '@src/dtos/user.dto';
+import { IUserData, ISessionData } from '@src/dtos/user.dto';
 import { IReq, IRes } from './types/express/misc';
-import AuthService from '@src/services/AuthService';
+import SessionUtil from '@src/util/SessionUtil';
 
 
 // **** Functions **** //
@@ -45,12 +45,13 @@ async function delete_(req: IReq, res: IRes) {
 }
 
 /**
- * Login user
+ * Get session user.
  */
-async function login(req: IReq<ILoginData>, res: IRes) {
-  const loginData = req.body;
-  await AuthService.login(loginData);
-  return res.status(HttpStatusCodes.OK).end();
+async function getLogonUser(req: IReq, res: IRes) {
+  // Get session data
+  const sessionData = await SessionUtil.getSessionData<ISessionData>(req);
+
+  return res.status(HttpStatusCodes.OK).json({ sessionData });
 }
 
 
@@ -61,5 +62,5 @@ export default {
   register,
   update,
   delete: delete_,
-  login,
+  getLogonUser,
 } as const;

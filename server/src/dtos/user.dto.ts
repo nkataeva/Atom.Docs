@@ -12,3 +12,10 @@ export interface ILoginData {
     login: string,
     password: string
 }
+
+// Данные, хранимые в сессии
+export interface ISessionData {
+    id: number;
+    email: string;
+    login: string;
+}
