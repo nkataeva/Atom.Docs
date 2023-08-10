@@ -43,18 +43,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewPDF = ({captionRequest},obj) => {
+const NewPDF = (props) => {
   const [name, setName] = useState('');
   const [field1, setField1] = useState('');
   const [field2, setField2] = useState('');
 
   const[textinput,setTextinput]= useState('');
-  const[textDayCount,setTextDayCount]= useState('');
+  const[textDayCount,setTextDayCount]= useState(7);
   const[texttarget,setTexttarget]= useState('');
 
  
-  let captionFactory=obj.captionFactory
-  let userName=obj.userName
+  let captionFactory=props.captionFactory
+  let userName=props.userName
 
   //для Заявки направления в командировку
   const formatDate = (date) => {
@@ -62,20 +62,21 @@ const NewPDF = ({captionRequest},obj) => {
     return date.toLocaleDateString('ru-RU', options);
   };
 
+  
   const today = new Date();
   const futureDate = new Date();
-  futureDate.setDate(futureDate.getDate() + textDayCount); // 
+  futureDate.setDate(futureDate.getDate() + parseInt(textDayCount)); // 
 
   return(
   <div>
     <div>
-    {captionRequest === 'Заявка на информационный обмен' && (
+    {props.captionRequest === 'Заявка на информационный обмен' && (
       <div class="text-field">
         <label class="text-field__label">Введите информацию про ваши тезисы :</label>
         <input class="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
       </div>
       )}
-      {captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
+      {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
       <div class="text-field">
         <label class="text-field__label">Введите информацию про ваше место назначения : </label>
         <input  class="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
@@ -94,13 +95,13 @@ const NewPDF = ({captionRequest},obj) => {
       <Page size="A4">
             <View style={styles.container}>
 
-            {captionRequest === 'Заявка на информационный обмен' && (
+            {props.captionRequest === 'Заявка на информационный обмен' && (
               <div>
                 <Text style={styles.title}>Заявка на информационный обмен</Text>
                 <Text style={styles.text}>Тезисы, содержащие информацию: {textinput}</Text>
               </div>
               )}
-             {captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
+             {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
               <div>
                 <Text style={styles.header}> Такому - то</Text>
                 <Text style={styles.header}> Иванову И.И.</Text>
@@ -115,7 +116,7 @@ const NewPDF = ({captionRequest},obj) => {
 
               </div>
               )}
-              {captionRequest === 'Заявка на предоставление отпуска' && (
+              {props.captionRequest === 'Заявка на предоставление отпуска' && (
               <Text style={styles.title}>Заявка на предоставление отпуска</Text>
               )}
             </View>
@@ -126,15 +127,15 @@ const NewPDF = ({captionRequest},obj) => {
   </div>);
 };
 
-const PdfGenerator = ( obj
+const PdfGenerator = ( userName,
+  chief,
+  captionFactory,
+  content,
+  justification,
+  status
                       ) => {
-                        let captionRequest = obj.captionRequest !== undefined ? obj.captionRequest : '';
-                        let userName = obj.userName !== undefined ? obj.userName : '';
-                        let chief = obj.chief !== undefined ? obj.chief : '';
-                        let captionFactory = obj.captionFactory !== undefined ? obj.captionFactory : '';
-                        let content = obj.content !== undefined ? obj.content : '';
-                        let justification = obj.justification !== undefined ? obj.justification : '';
-                        let status = obj.status !== undefined ? obj.status : '';
+                        
+                        console.log("in PdfGenerator - "+userName)
   const [typeTemplate, setTypeTemplatea] = React.useState([
     { 
       captionRequest: 'Заявка на информационный обмен', 
@@ -172,7 +173,7 @@ const PdfGenerator = ( obj
     const form = typeTemplate.find((item) => item.captionRequest === selectedFormName);
     setSelectedForm(form);
   };
-  console.log("in PdfGenerator selectedForm.caption ", selectedForm?.captionRequest);
+
   return (
     <div>
       <div>
@@ -186,12 +187,12 @@ const PdfGenerator = ( obj
       </div>
       <div>
         <NewPDF captionRequest ={selectedForm?.captionRequest} 
-         userName = {userName} 
+         userName = {selectedForm?.userName} 
         chief ={selectedForm?.chief}  
-        captionFactory = {captionFactory}
-        content = {content}
-        justification = {justification}
-        status = {status} 
+        captionFactory = {selectedForm?.captionFactory}
+        content = {selectedForm?.content}
+        justification = {selectedForm?.justification}
+        status = {selectedForm?.status} 
         />
       </div>
     </div>

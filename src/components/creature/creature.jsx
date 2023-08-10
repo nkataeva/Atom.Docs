@@ -33,7 +33,7 @@ const Creature = () => {
   
 const randomObject = data[0];
 
-console.log("in Creature "+randomObject)
+console.log("in Creature "+randomObject+"\n"+randomObject.userName+" ; "+randomObject.chief)
   return (
     <div>
       {/* <Link to='/creature' activeStyle></Link>
