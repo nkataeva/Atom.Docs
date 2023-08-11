@@ -55,9 +55,6 @@ const InfoExchangeBlock = ({ textinput, textfactory,content, justification, user
     <Text style={styles.text}>Обоснованием для обмена считать : {justification}</Text>
   </View>
 );
-
-
-
 const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, texttarget }) => {
   const formatDate = (date) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -103,6 +100,28 @@ const VacationBlock = ({ userName ,textDayCount}) => {
       <Text style={styles.title}>Заявка на предоставление отпуска</Text>
       <Text style={styles.text}>Прошу предоставить мне отпуск сроком на {textDayCount} календарных дней , с {formatDate(today)} по {formatDate(futureDate)}</Text>
       
+    </View>
+  );
+};
+
+const ResignationBlock = ({ userName, content }) => {
+
+  const formatDate = (date) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return date.toLocaleDateString('ru-RU', options);
+  };
+
+  const today = new Date();
+  return (
+    <View>
+      <Text style={styles.header}>Такому - то</Text>
+      <Text style={styles.header}>Иванову И.И.</Text>
+      <Text style={styles.header}>от (должность струдника) {userName}</Text>
+      <Text style={styles.header}> {userName}</Text>
+
+      <Text style={styles.title}>Заявление на увольнение</Text>
+      <Text style={styles.text}>Прошу уволить меня с должности с {formatDate(today)}</Text>
+      <Text style={styles.text}>Причина увольнения: {content}</Text>
     </View>
   );
 };
@@ -157,6 +176,13 @@ const NewPDF = (props) => {
           <p />
           </div>
         )}
+        {props.captionRequest === 'Заявление на увольнение' && (
+        <div className="text-field">
+          <label className="text-field__label">Введите информацию про причину увольнения :</label>
+          <input className="text-field__input" type="text" value={content} onChange={e => setContent(e.target.value)} />
+          <p />
+          </div>
+        )}
       </div>
       <div>
         <PDFViewer width={600} height={300}>
@@ -188,6 +214,12 @@ const NewPDF = (props) => {
                       textDayCount={textDayCount}
                     />
                   )}
+                {props.captionRequest === 'Заявление на увольнение' && (
+                  <ResignationBlock
+                    userName={props.userName}
+                    content={content}
+                  />
+                )}
               </View>
             </Page>
           </Document>
@@ -209,6 +241,9 @@ const typeTemplate = [
     },
     {
       captionRequest: 'Заявка на предоставление отпуска',
+    },
+    {
+      captionRequest: 'Заявление на увольнение',
     },
   ];
 
