@@ -151,10 +151,10 @@ const NewPDF = (props) => {
           </div>
         )}
         {props.captionRequest === 'Заявка на предоставление отпуска' && (
-          <div className="text-field">
-            <label className="text-field__label">Введите информацию про начало отпуска:</label>
-            <input className="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
-            <p />
+        <div className="text-field">
+          <label className="text-field__label">Введите информацию про начало отпуска:</label>
+          <input className="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
+          <p />
           </div>
         )}
       </div>
@@ -183,10 +183,11 @@ const NewPDF = (props) => {
                   />
                 )}
                 {props.captionRequest === 'Заявка на предоставление отпуска' && (
-                  <VacationBlock
-                    startDate={props.startDate}
-                  />
-                )}
+                    <VacationBlock
+                      userName={props.userName}
+                      textDayCount={textDayCount}
+                    />
+                  )}
               </View>
             </Page>
           </Document>
