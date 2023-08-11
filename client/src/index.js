@@ -4,6 +4,7 @@ import App from "./components/app/app";
 import "./styles/index.scss";
 import { injectStores } from "@mobx-devtools/tools";
 import User from "./stores/UserStore";
+import Signs from "./stores/SignStore";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 export const userStore = new User();
