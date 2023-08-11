@@ -1,5 +1,5 @@
 import { CreatePDF } from "../application/CreatePDF";
-import PdfGenerator from "../pdf/newPdf";
+import PdfGenerator from "../PdfGenerator/PdfGenerator";
 
 const Creature = () => {
   const data = [
