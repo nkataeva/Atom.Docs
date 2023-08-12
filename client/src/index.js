@@ -8,7 +8,8 @@ import Signs from "./stores/SignStore";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 export const userStore = new User();
-injectStores({ userStore });
+export const signsStore = new Signs();
+injectStores({ userStore, signsStore });
 if (localStorage.getItem("user")) {
   userStore.createUser(JSON.parse(localStorage.getItem("user")));
 }

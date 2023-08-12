@@ -49,7 +49,7 @@ const Header = observer(() => {
           placement="bottomRight"
         >
           <Space>
-            {userStore.getUser?.name}
+            {userStore.getUser?.fio}
             <AvatarIcon width={"35px"} height={"35px"} />
           </Space>
         </Dropdown>

@@ -33,9 +33,25 @@ class User {
     return this.user;
   }
 
-  createUser(user) {
-    this.user = user;
-  }
+  createUser = async (user) => {
+    try {
+      const response = await fetch("http://localhost:3001/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        this.user = user;
+        console.log(response);
+      } else {
+        throw new Error(response.status);
+      }
+    } catch (error) {
+      console.error("Ошибка создания пользователя:", error);
+    }
+  };
 
   deleteUser() {
     this.user = null;
