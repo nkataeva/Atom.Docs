@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./registration.module.scss";
-import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { APPRoute } from "../../const";
 import { userStore } from "../../index";
@@ -9,8 +8,7 @@ const Registration = () => {
   const [formData, setFormData] = useState({
     login: "",
     password: "",
-    name: "",
-    role: "boss",
+    fio: "",
     email: "",
   });
   const navigate = useNavigate();
@@ -19,16 +17,11 @@ const Registration = () => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-  const handleSelectChange = (value) => {
-    setFormData({ ...formData, role: value });
-  };
-
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     userStore.createUser(formData); //добавление польз в стор
-    navigate(APPRoute.MAIN);
-    console.log(formData);
-    localStorage.setItem("user", JSON.stringify(formData));
+    // navigate(APPRoute.MAIN);
+    // localStorage.setItem("user", JSON.stringify(formData));
   };
 
   return (
@@ -53,22 +46,11 @@ const Registration = () => {
         />
         <input
           type="text"
-          name="name"
+          name="fio"
           placeholder="ФИО"
           required
           onChange={handleInputChange}
           value={formData.name}
-        />
-        <Select
-          defaultValue="boss"
-          size="large"
-          className={styles.select}
-          popupClassName={styles.selectList}
-          onChange={handleSelectChange}
-          options={[
-            { value: "boss", label: "Руководитель" },
-            { value: "worker", label: "Работник" },
-          ]}
         />
         <input
           type="email"
