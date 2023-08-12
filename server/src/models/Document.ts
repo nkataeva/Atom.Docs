@@ -63,4 +63,8 @@ export default class Document extends Model {
     // обоснование 
     @Column(DataType.TEXT)
     reason!: string;
+
+    // обоснование 
+    @Column(DataType.STRING)
+    orgName!: string;   
 }

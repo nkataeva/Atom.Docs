@@ -89,32 +89,45 @@ docRouter.post(
   DocRoutes.create,
 );
 
-// // Send document to sign
-// docRouter.post(
-//   Paths.Docs.Send,
-//   validate('login', 'email', 'password', 'fio'),
-//   UserRoutes.register,
-// );
-
+// Send document to sign
+docRouter.post(
+  Paths.Docs.Send,
+  DocRoutes.send,
+);
+ 
 // // Sign document
 // docRouter.put(
 //   Paths.Docs.Sign,
-//   validate('login', 'email', 'password', 'fio', ['id', 'number', 'params']),
-//   UserRoutes.update,
-// );
-
-// // Get created documents
-// docRouter.get(
+//   validate(['id_user', 'number'], ['id_doc', 'number']),
+//   DocRoutes.sign,
+//  );
+ 
+//  // Get created documents 
+//  docRouter.get(
 //   Paths.Docs.GetCreated,
-//   validate(['id', 'number', 'params']),
-//   UserRoutes.delete,
-// );
+//   DocRoutes.getCreated,
+//  );
+
 
 // // Get documents to sign
 // docRouter.get(
 //   Paths.Docs.GetForSign,
 //   UserRoutes.getLogonUser
 // );
+
+// //Get docs user
+// docRouter.put(
+//   Paths.Docs.GetDocsUser,
+//   validate('id_user'),
+//   DocRoutes.getDocsUserSign,
+//  );
+ 
+//  //Get docs user for sign
+//  docRouter.put(
+//   Paths.Docs.GetDocsUserSign,
+//   validate('id_user'),
+//   DocRoutes.getDocsUserSign,
+//  );
 
 
 // Add UserRouter

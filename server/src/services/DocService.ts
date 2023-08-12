@@ -1,89 +1,66 @@
-// import PwdUtil from '@src/util/PwdUtil';
 import Document from '@src/models/Document';
 import { IDocData } from '@src/dtos/doc.dto';
-// import { RouteError } from '@src/other/classes';
-// import HttpStatusCodes from '@src/constants/HttpStatusCodes';
+import { RouteError } from '@src/other/classes';
+import HttpStatusCodes from '@src/constants/HttpStatusCodes';
+import DocSignService from './DocSignService';
 
 
 // // **** Variables **** //
 
-// export const USER_NOT_FOUND_ERR = 'Пользователь не найден';
-// export const USER_ALREADY_EXISTS = 'Пользователь уже существует'
-
-
-// // **** Functions **** //
-
-// /**
-//  * Test user with such unique props
-//  */
-// async function userExists(usrData: IUserData, usrID: number) {
-//   let usr = await User.findOne({
-//     where: { login: usrData.login }
-//   });
-//   if ((usr !== null) && (usr.id != usrID)) return true;
-
-//   usr = await User.findOne({
-//     where: { email: usrData.email }
-//   })
-//   if ((usr !== null) && (usr.id != usrID)) return true;
-
-//   return false;
-// }
-
-// /**
-//  * Get all users.
-//  */
-// async function getAll(): Promise<User[]> {
-//   return await User.findAll();
-// }
+export const DOC_NOT_FOUND_ERR = 'Документ не найден';
 
 /**
  * Create new document.
  */
 async function create(docData: IDocData) {
-  console.log(docData.id_type);
    const doc = await Document.create(
     {
       typeId: docData.id_type,
       ownerId: docData.id_user,
-      name: docData.name
+      name: docData.name,
+      creationDate: Date(),
     }
-  )
+  );
+
+  // дополнительные поля
+  if (docData.extra?.dt_start !== undefined) {
+    doc.vacationBeginDate = new Date(docData.extra.dt_start);
+  }
+  if (docData.extra?.duration !== undefined) {
+    doc.vacationDuration = docData.extra.duration;
+  }
+  if (docData.extra?.name_org !== undefined) {
+    doc.orgName = docData.extra.name_org;
+  }
+  if (docData.extra?.content !== undefined) {
+    doc.content = docData.extra.content;
+  }
+  if (docData.extra?.reason !== undefined) {
+    doc.reason = docData.extra.reason;
+  }
+  await doc.save();
 
   return doc;
 }
 
-// /**
-//  * Update user.
-//  */
-// async function update(usrId: number, usrData: IUserData) {
-//   // find user by id
-//   const usr = await User.findByPk(usrId);
-//   if (usr === null) {
-//     throw new RouteError(
-//       HttpStatusCodes.NOT_FOUND,
-//       USER_NOT_FOUND_ERR,
-//     );
-//   }
+/**
+ * Send document to sign.
+ */
+async function send(docId: number, signers: number[]) {
+  // find user by id
+  const doc = await Document.findByPk(docId);
+  if (doc === null) {
+    throw new RouteError(
+      HttpStatusCodes.NOT_FOUND,
+      DOC_NOT_FOUND_ERR,
+    );
+  }
 
-//   // test existance
-//   if (await userExists(usrData, usrId)) {
-//     throw new RouteError(
-//       HttpStatusCodes.BAD_REQUEST,
-//       USER_ALREADY_EXISTS
-//     )
-//   };
+  for (const signerId of signers) {
+    await DocSignService.create(docId, signerId);
+  }
+}
 
-//   // update user data
-//   const hashPassword = await PwdUtil.getHash(usrData.password);
-//   usr.set({
-//     email: usrData.email,
-//     pwdHash: hashPassword,
-//     login: usrData.login,
-//     fio: usrData.fio
-//   });
-//   await usr.save();
-// }
 
 // /**
 //  * Delete a user by their id.
@@ -102,11 +79,11 @@ async function create(docData: IDocData) {
 // }
 
 
-// // **** Export default **** //
+// **** Export default **** //
 
 export default {
-//   getAll,
    create,
-//   update,
-//   delete: _delete,
+   send,
+  //  sign,
+  //  getCreated,
 } as const;

@@ -28,7 +28,7 @@ const Paths = {
     Base: '/docs',
 
     Create: '/create',
-    Send: '/send',
+    Send: '/send/:id',
     Sign: '/sign',
     GetCreated: '/created',
     GetForSign: '/forsign'
