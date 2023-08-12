@@ -23,6 +23,16 @@ const Paths = {
     Delete: '/delete/:id',
     GetLogonUser: '/logon'
   },
+
+  Docs: {
+    Base: '/docs',
+
+    Create: '/create',
+    Send: '/send',
+    Sign: '/sign',
+    GetCreated: '/created',
+    GetForSign: '/forsign'
+  }
 };
 
 
