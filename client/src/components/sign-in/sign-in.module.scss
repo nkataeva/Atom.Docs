@@ -12,7 +12,8 @@
   margin: 0 auto;
   font-weight: 300;
   button {
-    padding: 12px 91px;
+    width: 100%;
+    padding: 12px 0;
     border-radius: 23px;
     font-size: 24px;
     font-weight: 300;
@@ -30,12 +31,22 @@
     font-weight: 300;
     line-height: 24px;
   }
+  a {
+    width: 100%;
+  }
 }
 
 .inputContainer {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  width: 100%;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 25px;
+  flex-grow: 1;
   width: 100%;
 }
 

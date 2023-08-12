@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./registration.module.scss";
 import { useNavigate } from "react-router-dom";
 import { APPRoute } from "../../const";
-import { userStore } from "../../index";
+import userStore from "../../stores/UserStore";
+import { observer } from "mobx-react-lite";
 
 const Registration = () => {
+  const { createUser, isUserAuth } = userStore;
   const [formData, setFormData] = useState({
     login: "",
     password: "",
@@ -13,15 +15,20 @@ const Registration = () => {
   });
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (isUserAuth) {
+      navigate(APPRoute.MAIN);
+    }
+  }, [isUserAuth, navigate]);
+
   const handleInputChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    userStore.createUser(formData); //добавление польз в стор
-    // navigate(APPRoute.MAIN);
-    // localStorage.setItem("user", JSON.stringify(formData));
+    createUser(formData); //добавление польз в стор
+    localStorage.setItem("userAuth", "true");
   };
 
   return (
@@ -66,4 +73,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default observer(Registration);

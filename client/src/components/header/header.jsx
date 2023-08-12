@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./header.module.scss";
 import Logo from "../logo/logo";
 import { Dropdown, Space } from "antd";
@@ -6,13 +6,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { APPRoute } from "../../const";
 import { ReactComponent as AvatarIcon } from "../../assets/avatar.svg";
 import { observer } from "mobx-react-lite";
-import { userStore } from "../../index";
+import userStore from "../../stores/UserStore";
 
 const Header = observer(() => {
+  const { logOut, user, getAuthUser } = userStore;
   const naigate = useNavigate();
+
+  useEffect(() => {
+    getAuthUser();
+  }, [getAuthUser]);
+
   const LogoutClick = () => {
-    userStore.deleteUser();
-    localStorage.setItem("user", null);
+    logOut();
+    localStorage.setItem("userAuth", "false");
     naigate(APPRoute.ENTRY);
   };
 
@@ -49,7 +55,7 @@ const Header = observer(() => {
           placement="bottomRight"
         >
           <Space>
-            {userStore.getUser?.fio}
+            {user?.login}
             <AvatarIcon width={"35px"} height={"35px"} />
           </Space>
         </Dropdown>

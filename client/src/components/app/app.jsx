@@ -17,7 +17,7 @@ const ForSigningPage = lazy(() =>
 const SigningPage = lazy(() => import("../../pages/SigningPage/SigningPage"));
 const ShowApplication = lazy(() => import("../show/show"));
 const Creature = lazy(() => import("../creature/creature"));
-const SignPage = lazy(() => import('../../pages/SignPage/SignPage'))
+const SignPage = lazy(() => import("../../pages/SignPage/SignPage"));
 const NotFoundScreen = lazy(() =>
   import("../not-found-screen/not-found-screen")
 );
