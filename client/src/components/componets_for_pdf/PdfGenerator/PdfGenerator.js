@@ -4,8 +4,9 @@ import NewPDF from "../NewPDF/NewPDF";
 import userStore from "../../../stores/UserStore";
 import { Select } from "antd";
 import { template, templateFormatedData } from "../../../const";
+import {observer} from "mobx-react-lite";
 
-const PdfGenerator = ({ obj }) => {
+const PdfGenerator = observer(({ obj }) => {
   const { getAllUser, user, users } = userStore;
   const { userName, chief, captionFactory, content, justification, status } =
     obj;
@@ -86,6 +87,6 @@ const PdfGenerator = ({ obj }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PdfGenerator;
