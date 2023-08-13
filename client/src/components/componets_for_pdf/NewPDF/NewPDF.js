@@ -133,21 +133,31 @@ const NewPDF = (props) => {
           </button>
         </div>
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={{
-            overlay: {
-              backgroundColor: "rgba(0, 0, 0, 0.7)",
-              zIndex: 1000,
-            },
-            content: {
-              width: "600px",
-              height: "400px",
-              margin: "auto",
-            },
-          }}
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={{
+              overlay: {
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                zIndex: 1000,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden", /* Убираем скролл у overlay */
+              },
+              content: {
+                width: "90%", /* Здесь вы можете задать процент от ширины окна */
+                maxWidth: "800px", /* Опционально, чтобы установить максимальную ширину */
+                margin: "auto",
+                padding: 0,
+                border: "none",
+                borderRadius: 0,
+                background: "transparent",
+                overflow: "hidden", /* Убираем скролл у контента */
+              },
+            }}
         >
-          <PDFViewer width={580} height={300}>
+          <div className="modal-content">
+            <PDFViewer width={700} height={700}>
             <Document>
               <Page size="A4">
                 <View style="container">
@@ -188,7 +198,8 @@ const NewPDF = (props) => {
                 </View>
               </Page>
             </Document>
-          </PDFViewer>
+            </PDFViewer>
+          </div>
         </Modal>
       </div>
     </div>

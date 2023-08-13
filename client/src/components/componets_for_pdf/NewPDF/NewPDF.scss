@@ -2,11 +2,11 @@
   color: #131415;
   background-color: #131415;
   display: grid;
-  grid-template-columns: 1fr; /* Один столбец для мобильных экранов */
-  grid-gap: 10px; /* Промежуток между полями */
+  grid-template-columns: 1fr;
+  grid-gap: 27px;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); /* Два столбца для экранов шире 768px */
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .text-field__input {
@@ -18,8 +18,8 @@
     font-style: normal;
     font-weight: 100;
     line-height: normal;
-    width: 100%; /* Ширина на 100% для адаптивности */
-    padding: 10px; /* Добавим отступ для визуального разделения */
+    width: 100%;
+    padding: 10px;
 
     &::placeholder {
       color: #999; /* Цвет подсказки */
@@ -30,7 +30,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .btn{
@@ -76,3 +76,22 @@ text {
     max-width: 100%; /* Для более узких экранов увеличиваем максимальную ширину */
   }
 }
+
+.modal-content {
+  position: relative; /* Добавим позиционирование для правильной высоты */
+  border-radius: 10px; /* Скругление углов */
+  padding: 20px; /* Внутренний отступ */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
+  width: 600px;
+  height: 814px;
+  flex-shrink: 0;
+  max-width: 600px; /* Максимальная ширина для контента */
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+@media screen and (max-width: 800px) {
+  .modal-content {
+    max-width: 90%; /* Уменьшение максимальной ширины на мобильных экранах */
+  }
+}
+
