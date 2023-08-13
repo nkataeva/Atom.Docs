@@ -15,6 +15,7 @@ import ResignationBlock from "../ResignationBlock/ResignationBlock";
 import VacationBlock from "../VacationBlock/VacationBlock";
 import BusinessTripBlock from "../BusinessTripBlock/BusinessTripBlock";
 import InfoExchangeBlock from "../InfoExchangeBlock/InfoExchangeBlock";
+import Modal from "react-modal";
 
 Font.register({
   family: "Roboto",
@@ -28,6 +29,16 @@ const NewPDF = (props) => {
   const [texttarget, setTexttarget] = useState("");
   const [content, setContent] = useState("");
   const [justification, setJustification] = useState("");
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  const savePDF = () => {};
   return (
     <div>
       <div>
@@ -113,47 +124,72 @@ const NewPDF = (props) => {
         )}
       </div>
       <div className="pdf-container">
-        <PDFViewer width={580} height={300}>
-          <Document>
-            <Page size="A4">
-              <View style="container">
-                {props.captionRequest === "Заявка на информационный обмен" && (
-                  <InfoExchangeBlock
-                    textfactory={textfactory}
-                    textinput={textinput}
-                    content={content}
-                    justification={justification}
-                    userName={props.userName}
-                  />
-                )}
+        <div className="button-container">
+          <button className="btn" onClick={savePDF}>
+            Сохранить
+          </button>
+          <button className="btn" onClick={openModal}>
+            Предосмотр
+          </button>
+        </div>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+              zIndex: 1000,
+            },
+            content: {
+              width: "600px",
+              height: "400px",
+              margin: "auto",
+            },
+          }}
+        >
+          <PDFViewer width={580} height={300}>
+            <Document>
+              <Page size="A4">
+                <View style="container">
+                  {props.captionRequest ===
+                    "Заявка на информационный обмен" && (
+                    <InfoExchangeBlock
+                      textfactory={textfactory}
+                      textinput={textinput}
+                      content={content}
+                      justification={justification}
+                      userName={props.userName}
+                    />
+                  )}
 
-                {props.captionRequest ===
-                  "Заявка для направления в командировку/для направления в служебную поездку" && (
-                  <BusinessTripBlock
-                    captionFactory={props.captionFactory}
-                    userName={props.userName}
-                    textinput={textinput}
-                    textDayCount={textDayCount}
-                    texttarget={texttarget}
-                  />
-                )}
-                {props.captionRequest ===
-                  "Заявка на предоставление отпуска" && (
-                  <VacationBlock
-                    userName={props.userName}
-                    textDayCount={textDayCount}
-                  />
-                )}
-                {props.captionRequest === "Заявление на увольнение" && (
-                  <ResignationBlock
-                    userName={props.userName}
-                    content={content}
-                  />
-                )}
-              </View>
-            </Page>
-          </Document>
-        </PDFViewer>
+                  {props.captionRequest ===
+                    "Заявка для направления в командировку/для направления в служебную поездку" && (
+                    <BusinessTripBlock
+                      captionFactory={props.captionFactory}
+                      userName={props.userName}
+                      textinput={textinput}
+                      textDayCount={textDayCount}
+                      texttarget={texttarget}
+                    />
+                  )}
+                  {props.captionRequest ===
+                    "Заявка на предоставление отпуска" && (
+                    <VacationBlock
+                      userName={props.userName}
+                      textDayCount={textDayCount}
+                    />
+                  )}
+                  {props.captionRequest === "Заявление на увольнение" && (
+                    <ResignationBlock
+                      userName={props.userName}
+                      content={content}
+                    />
+                  )}
+                </View>
+              </Page>
+            </Document>
+          </PDFViewer>
+        </Modal>
       </div>
     </div>
   );

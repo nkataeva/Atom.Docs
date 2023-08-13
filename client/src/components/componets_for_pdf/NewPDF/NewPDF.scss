@@ -10,6 +10,7 @@
   }
 
   .text-field__input {
+    color: #999999;
     border-radius: 10px;
     border: 1px solid #7290BD;
     background-color: #131415;
@@ -25,7 +26,23 @@
     }
   }
 }
+.button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  justify-content: center; 
+}
 
+.btn{
+  display: flex;
+  width: 272px;
+  padding: 15px 35px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 23px;
+  background: #7290BD;
+}
 container {
   padding: 30px;
 }
