@@ -20,10 +20,10 @@ Font.register({
 
 const styles = StyleSheet.create(pdfStyle);
 
-const InfoExchangeBlock = ({ textinput, textfactory,content, justification, userName }) => (
+const InfoExchangeBlock = ({ textinput, textfactory,content, justification, userName,cheif }) => (
   <View>
-    <Text style={styles.header}>Такому - то</Text>
-    <Text style={styles.header}>Иванову И.И.</Text>
+    <Text style={styles.header}>Начальнику отдела</Text>
+    <Text style={styles.header}>{cheif ? cheif : "Иванову И.И."}</Text>
       <Text style={styles.header}>от (должность струдника) инженера</Text>
     <Text style={styles.header}> {userName}</Text>
     <Text style={styles.title}>Заявка на информационный обмен</Text>

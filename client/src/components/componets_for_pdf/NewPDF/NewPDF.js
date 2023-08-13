@@ -142,17 +142,17 @@ const NewPDF = (props) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                overflow: "hidden", /* Убираем скролл у overlay */
+                overflow: "hidden",
               },
               content: {
-                width: "90%", /* Здесь вы можете задать процент от ширины окна */
-                maxWidth: "800px", /* Опционально, чтобы установить максимальную ширину */
+                width: "90%",
+                maxWidth: "800px",
                 margin: "auto",
                 padding: 0,
                 border: "none",
                 borderRadius: 0,
                 background: "transparent",
-                overflow: "hidden", /* Убираем скролл у контента */
+                overflow: "hidden",
               },
             }}
         >
@@ -164,6 +164,7 @@ const NewPDF = (props) => {
                   {props.captionRequest ===
                     "Заявка на информационный обмен" && (
                     <InfoExchangeBlock
+                        cheif={props.chief}
                       textfactory={textfactory}
                       textinput={textinput}
                       content={content}
@@ -175,6 +176,7 @@ const NewPDF = (props) => {
                   {props.captionRequest ===
                     "Заявка для направления в командировку/для направления в служебную поездку" && (
                     <BusinessTripBlock
+                        cheif={props.chief}
                       captionFactory={props.captionFactory}
                       userName={props.userName}
                       textinput={textinput}
@@ -185,12 +187,14 @@ const NewPDF = (props) => {
                   {props.captionRequest ===
                     "Заявка на предоставление отпуска" && (
                     <VacationBlock
+                        cheif={props.chief}
                       userName={props.userName}
                       textDayCount={textDayCount}
                     />
                   )}
                   {props.captionRequest === "Заявление на увольнение" && (
                     <ResignationBlock
+                        cheif={props.chief}
                       userName={props.userName}
                       content={content}
                     />

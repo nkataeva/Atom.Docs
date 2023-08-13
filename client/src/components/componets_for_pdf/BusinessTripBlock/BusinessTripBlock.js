@@ -19,7 +19,7 @@ Font.register({
 });
 const styles = StyleSheet.create(pdfStyle);
 
-const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, texttarget }) => {
+const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, texttarget , cheif}) => {
     const formatDate = (date) => {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
       return date.toLocaleDateString('ru-RU', options);
@@ -31,8 +31,8 @@ const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, 
   
     return (
         <View className="business-trip-block">
-            <Text style={styles.header}>Такому - то</Text>
-            <Text style={styles.header}>Иванову И.И.</Text>
+            <Text style={styles.header}>Начальнику отдела</Text>
+            <Text style={styles.header}>{cheif ? cheif : "Иванову И.И."}</Text>
             <Text style={styles.header}>от (должность струдника) инженера</Text>
             <Text style={styles.header}> {userName}</Text>
 

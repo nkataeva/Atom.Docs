@@ -77,7 +77,7 @@ const PdfGenerator = ({ obj }) => {
         <NewPDF
           captionRequest={templateFormatedData[formData.id_type]}
           userName={user ? user.fio : ""}
-          chief={""}
+          chief={formData ? formData.name :""}
           captionFactory={captionFactory}
           content={content}
           justification={justification}
