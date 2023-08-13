@@ -15,12 +15,14 @@ const PdfGenerator = observer(({ obj }) => {
     getAllUser();
   }, [getAllUser]);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     id_user: 1,
     id_type: 1,
     name: "",
     extra: {
-      duration: null,
+      duration: 0,
       dt_start: "",
       name_org: "",
       content: "",
@@ -29,12 +31,8 @@ const PdfGenerator = observer(({ obj }) => {
     signers: [],
   });
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   const handleTypeChange = (value) => {
-    setFormData({ ...formData, id_type: value });
+    setFormData({ ...formData, id_type: parseInt(value) });
   };
 
   const handleSignersChange = (value) => {
@@ -83,6 +81,10 @@ const PdfGenerator = observer(({ obj }) => {
           content={content}
           justification={justification}
           status={status}
+          visible={true}
+          isOpen={modalIsOpen}
+          setIsOpen={setModalIsOpen}
+          formData={formData}
         />
       </div>
     </div>
