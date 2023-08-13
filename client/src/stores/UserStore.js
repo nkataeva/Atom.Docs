@@ -1,61 +1,86 @@
-import { makeObservable, action, observable, computed } from "mobx";
+import { makeObservable, action, observable, runInAction } from "mobx";
+import { AuthService } from "../http/services/authService";
 
 class User {
   user = null;
+  isUserAuth = false;
+  users = [];
 
   constructor() {
     makeObservable(this, {
       user: observable,
-      fetchUser: action,
-      getUser: computed,
+      isUserAuth: observable,
+      users: observable,
       createUser: action,
-      deleteUser: action,
+      logOut: action,
+      authUser: action,
+      getAuthUser: action,
+      getAllUser: action,
+      setAuthUser: action,
     });
   }
 
-  fetchUser = async () => {
-    try {
-      const response = await fetch("/api/users/all");
-
-      if (response.ok) {
-        const data = await response.json();
-        this.user = data;
-        console.log(data);
-      } else {
-        throw new Error(response.status);
-      }
-    } catch (error) {
-      console.error("Ошибка получения пользователя:", error);
-    }
+  setAuthUser = () => {
+    this.isUserAuth = true;
   };
-
-  get getUser() {
-    return this.user;
-  }
 
   createUser = async (user) => {
     try {
-      const response = await fetch("http://localhost:3001/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        body: JSON.stringify(user),
-      });
-      if (response.ok) {
-        this.user = user;
-        console.log(response);
-      } else {
-        throw new Error(response.status);
-      }
+      await AuthService.registerUser(user);
+      // runInAction(() => {
+      //   this.isUserAuth = true;
+      // });
     } catch (error) {
-      console.error("Ошибка создания пользователя:", error);
+      console.log(error, "Ошибка создания пользователя");
     }
   };
 
-  deleteUser() {
-    this.user = null;
-  }
+  authUser = async (user) => {
+    try {
+      await AuthService.requestLogin(user);
+      runInAction(() => {
+        this.isUserAuth = true;
+      });
+    } catch (error) {
+      console.log(error, "Ошибка авторизации");
+    }
+  };
+
+  getAuthUser = async () => {
+    try {
+      const user = await AuthService.requestUser();
+      runInAction(() => {
+        this.user = user.sessionData;
+      });
+    } catch (error) {
+      console.log(error, "Ошибка загрузки данных пользователя");
+    }
+  };
+
+  getAllUser = async () => {
+    try {
+      const users = await AuthService.requestAllUser();
+      runInAction(() => {
+        this.users = users.sessionData;
+      });
+    } catch (error) {
+      console.error(error, "Ошибка получения пользователя");
+    }
+  };
+
+  logOut = async () => {
+    try {
+      await AuthService.requestLogout();
+      runInAction(() => {
+        this.user = null;
+        this.isUserAuth = false;
+      });
+    } catch (error) {
+      console.error(error, "Ошибка выхода из учётной записи");
+    }
+  };
 }
 
-export default User;
+const userStore = new User();
+
+export default userStore;

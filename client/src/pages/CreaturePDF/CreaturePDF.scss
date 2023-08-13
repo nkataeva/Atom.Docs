@@ -1,0 +1,45 @@
+.creature-pdf-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+
+    .pdf-generator {
+        border: 1px solid #ccc;
+        padding: 20px;
+        max-width: 600px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+        border-radius: 8px;
+
+        .pdf-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .pdf-content {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .pdf-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    }
+}

@@ -3,15 +3,17 @@ import ReactDOM from "react-dom/client";
 import App from "./components/app/app";
 import "./styles/index.scss";
 import { injectStores } from "@mobx-devtools/tools";
-import User from "./stores/UserStore";
-import Signs from "./stores/SignStore";
+import signsStore from "./stores/SignStore";
+import userStore from "./stores/UserStore";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-export const userStore = new User();
-export const signsStore = new Signs();
+
 injectStores({ userStore, signsStore });
-if (localStorage.getItem("user")) {
-  userStore.createUser(JSON.parse(localStorage.getItem("user")));
+if (
+  localStorage.getItem("userAuth") &&
+  JSON.parse(localStorage.getItem("userAuth"))
+) {
+  userStore.setAuthUser();
 }
 
 root.render(

@@ -1,0 +1,50 @@
+.text-field {
+  margin-bottom: 20px;
+
+  .text-field__label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .text-field__input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}
+container {
+  padding: 30px;
+}
+header {
+  fontFamily: "Roboto";
+  fontSize: 12;
+  marginBottom: 10;
+  textAlign: 'right';
+  flexDirection: 'row';
+  justifyContent: 'flex-end'
+}
+title{
+  fontFamily: "Roboto";
+  fontSize: 20;
+  marginBottom: 10;
+  textAlign: 'center',
+}
+text {
+  fontFamily: "Roboto";
+  fontSize: 12;
+  marginBottom: 5,
+}
+.pdf-container {
+  width: 100%; /* По умолчанию занимает всю доступную ширину родительского элемента */
+  max-width: 800px; /* Опционально: ограничиваем максимальную ширину */
+  height: 100%; /* По умолчанию занимает всю доступную высоту родительского элемента */
+}
+
+@media screen and (max-width: 768px) {
+  .pdf-container {
+    max-width: 100%; /* Для более узких экранов увеличиваем максимальную ширину */
+  }
+}
