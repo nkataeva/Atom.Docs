@@ -24,7 +24,7 @@ const InfoExchangeBlock = ({ textinput, textfactory,content, justification, user
   <View>
     <Text style={styles.header}>Такому - то</Text>
     <Text style={styles.header}>Иванову И.И.</Text>
-    <Text style={styles.header}>от (должность струдника) {userName}</Text>
+      <Text style={styles.header}>от (должность струдника) инженера</Text>
     <Text style={styles.header}> {userName}</Text>
     <Text style={styles.title}>Заявка на информационный обмен</Text>
     <Text style={styles.text}>Прошу предоставить мне разрешение на информационный обмен с организацией {textfactory} с представленными тезисами : {textinput}</Text>

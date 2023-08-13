@@ -31,7 +31,7 @@ const ResignationBlock = ({ userName, content }) => {
       <View>
         <Text style={styles.header}>Такому - то</Text>
         <Text style={styles.header}>Иванову И.И.</Text>
-        <Text style={styles.header}>от (должность струдника) {userName}</Text>
+          <Text style={styles.header}>от (должность струдника) инженера</Text>
         <Text style={styles.header}> {userName}</Text>
   
         <Text style={styles.title}>Заявление на увольнение</Text>
