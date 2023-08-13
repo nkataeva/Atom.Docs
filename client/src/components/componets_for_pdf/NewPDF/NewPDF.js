@@ -17,6 +17,9 @@ import BusinessTripBlock from "../BusinessTripBlock/BusinessTripBlock";
 import InfoExchangeBlock from "../InfoExchangeBlock/InfoExchangeBlock";
 import Modal from "react-modal";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 Font.register({
   family: "Roboto",
   src: YsabeauSCRegular,
@@ -29,6 +32,8 @@ const NewPDF = (props) => {
   const [texttarget, setTexttarget] = useState("");
   const [content, setContent] = useState("");
   const [justification, setJustification] = useState("");
+
+  const [startDate, setStartDate] = useState(null);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -84,6 +89,12 @@ const NewPDF = (props) => {
               onChange={(e) => setTextfactory(e.target.value)}
               placeholder="Адрес организации"
             />
+            <DatePicker
+                className="text-field__input"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                placeholderText="Выберите дату"
+            />
             <input
               className="text-field__input"
               type="text"
@@ -91,6 +102,7 @@ const NewPDF = (props) => {
               onChange={(e) => setTextDayCount(e.target.value)}
               placeholder="Количество дней"
             />
+
             <input
               className="text-field__input"
               type="text"
@@ -102,6 +114,12 @@ const NewPDF = (props) => {
         )}
         {props.captionRequest === "Заявка на предоставление отпуска" && (
           <div className="text-field">
+            <DatePicker
+                className="text-field__input"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                placeholderText="Выберите дату"
+            />
             <input
               className="text-field__input"
               type="text"
@@ -113,6 +131,12 @@ const NewPDF = (props) => {
         )}
         {props.captionRequest === "Заявление на увольнение" && (
           <div className="text-field">
+            <DatePicker
+                className="text-field__input"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                placeholderText="Выберите дату"
+            />
             <input
               className="text-field__input"
               type="text"
@@ -180,6 +204,7 @@ const NewPDF = (props) => {
                       captionFactory={props.captionFactory}
                       userName={props.userName}
                       textinput={textinput}
+                        startDate={startDate}
                       textDayCount={textDayCount}
                       texttarget={texttarget}
                     />
@@ -188,6 +213,7 @@ const NewPDF = (props) => {
                     "Заявка на предоставление отпуска" && (
                     <VacationBlock
                         cheif={props.chief}
+                        startDate={startDate}
                       userName={props.userName}
                       textDayCount={textDayCount}
                     />
@@ -195,6 +221,7 @@ const NewPDF = (props) => {
                   {props.captionRequest === "Заявление на увольнение" && (
                     <ResignationBlock
                         cheif={props.chief}
+                        startDate={startDate}
                       userName={props.userName}
                       content={content}
                     />

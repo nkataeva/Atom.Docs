@@ -27,22 +27,23 @@
   }
 }
 .button-container {
-  display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  justify-content: center;
-}
-
-.btn{
-  display: flex;
-  width: 272px;
-  padding: 15px 35px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border-radius: 23px;
-  background: #7290BD;
+  display: flex;
+  gap: 27px;
+  .btn {
+    display: flex;
+    width: 272px;
+    padding: 15px 35px;
+    gap: 10px;
+    border-radius: 23px;
+    background: #7290BD;
+  }
 }
+
+
+
 container {
   padding: 30px;
 }
@@ -87,6 +88,9 @@ text {
   flex-shrink: 0;
   max-width: 600px;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 @media screen and (max-width: 800px) {

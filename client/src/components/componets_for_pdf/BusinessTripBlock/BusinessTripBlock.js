@@ -19,16 +19,17 @@ Font.register({
 });
 const styles = StyleSheet.create(pdfStyle);
 
-const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, texttarget , cheif}) => {
+const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, texttarget , cheif,startDate}) => {
     const formatDate = (date) => {
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      return date.toLocaleDateString('ru-RU', options);
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return date.toLocaleDateString('ru-RU', options);
     };
-  
-    const today = new Date();
-    const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + parseInt(textDayCount));
-  
+
+    const futureDate = new Date(startDate);
+    futureDate.setDate(futureDate.getDate() + parseInt(textDayCount, 10));
+
+
+
     return (
         <View className="business-trip-block">
             <Text style={styles.header}>Начальнику отдела</Text>
@@ -39,7 +40,7 @@ const BusinessTripBlock = ({ captionFactory, userName, textinput, textDayCount, 
             <Text style={styles.title}>Заявка для направления в командировку/для направления в служебную поездку</Text>
             <Text style={styles.text}>Прошу отправить меня в командировку в организацию "{captionFactory}" , находящуюся по адресу {textinput},</Text>
 
-            <Text style={styles.text}>Сроком на {textDayCount} календарных дней, с {formatDate(today)} по {formatDate(futureDate)}</Text>
+            <Text style={styles.text}>Сроком на {textDayCount} календарных дней, с {formatDate(startDate)} по {formatDate(futureDate)}</Text>
             <Text style={styles.text}>Обоснованием для служебной поездки является: {texttarget}</Text>
         </View>
     );

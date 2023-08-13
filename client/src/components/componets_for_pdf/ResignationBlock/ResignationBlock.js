@@ -19,7 +19,7 @@ Font.register({
   });
   
   const styles = StyleSheet.create(pdfStyle);
-const ResignationBlock = ({ userName, content,cheif }) => {
+const ResignationBlock = ({ userName, content,cheif,startDate }) => {
 
     const formatDate = (date) => {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -35,7 +35,7 @@ const ResignationBlock = ({ userName, content,cheif }) => {
         <Text style={styles.header}> {userName}</Text>
   
         <Text style={styles.title}>Заявление на увольнение</Text>
-        <Text style={styles.text}>Прошу уволить меня с должности с {formatDate(today)}</Text>
+        <Text style={styles.text}>Прошу уволить меня с должности с {formatDate(startDate)}</Text>
         <Text style={styles.text}>Причина увольнения: {content}</Text>
       </View>
     );

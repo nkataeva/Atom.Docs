@@ -20,16 +20,15 @@ Font.register({
 
 const styles = StyleSheet.create(pdfStyle);
 
-const VacationBlock = ({ userName ,textDayCount,cheif}) => {
+const VacationBlock = ({ userName ,textDayCount,cheif, startDate}) => {
     const formatDate = (date) => {
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      return date.toLocaleDateString('ru-RU', options);
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return date.toLocaleDateString('ru-RU', options);
     };
-  
-    const today = new Date();
-    const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + parseInt(textDayCount));
-  
+
+    const futureDate = new Date(startDate);
+    futureDate.setDate(futureDate.getDate() + parseInt(textDayCount, 10));
+
     return (
       <View>
         <Text style={styles.header}>Начальнику отдела</Text>
@@ -38,7 +37,7 @@ const VacationBlock = ({ userName ,textDayCount,cheif}) => {
         <Text style={styles.header}> {userName}</Text>
   
         <Text style={styles.title}>Заявка на предоставление отпуска</Text>
-        <Text style={styles.text}>Прошу предоставить мне отпуск сроком на {textDayCount} календарных дней , с {formatDate(today)} по {formatDate(futureDate)}</Text>
+        <Text style={styles.text}>Прошу предоставить мне отпуск сроком на {textDayCount} календарных дней , с {formatDate(startDate)} по {formatDate(futureDate)}</Text>
         
       </View>
     );
