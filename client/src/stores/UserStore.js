@@ -27,9 +27,9 @@ class User {
   createUser = async (user) => {
     try {
       await AuthService.registerUser(user);
-      runInAction(() => {
-        this.isUserAuth = true;
-      });
+      // runInAction(() => {
+      //   this.isUserAuth = true;
+      // });
     } catch (error) {
       console.log(error, "Ошибка создания пользователя");
     }

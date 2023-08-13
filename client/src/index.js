@@ -9,7 +9,10 @@ import userStore from "./stores/UserStore";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 injectStores({ userStore, signsStore });
-if (localStorage.getItem("userAuth")) {
+if (
+  localStorage.getItem("userAuth") &&
+  JSON.parse(localStorage.getItem("userAuth"))
+) {
   userStore.setAuthUser();
 }
 
