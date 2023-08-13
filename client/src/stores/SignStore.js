@@ -35,18 +35,18 @@ class Signs {
     }
   }
 
-  async fetchMySign() {
+  fetchMySign = async () => {
     try {
       this.loading = true;
-      const mySign = await SignService.requestCreatedSign(userStore.user.id);
+      const mySign = await SignService.requestCreatedSign(userStore.user?.id);
       runInAction(() => {
-        this.mySign = mySign;
+        this.mySign = mySign.docs;
         this.loading = false;
       });
     } catch (error) {
       console.log("Ошибка при получении созданных заявок:", error);
     }
-  }
+  };
 
   async fetchForSigning() {
     try {
