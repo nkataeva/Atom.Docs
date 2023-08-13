@@ -48,18 +48,18 @@ class Signs {
     }
   };
 
-  async fetchForSigning() {
+  fetchForSigning = async () => {
     try {
       this.loading = true;
-      const forSigning = await SignService.requestSignForMe(userStore.user.id);
+      const forSigning = await SignService.requestSignForMe(userStore.user?.id);
       runInAction(() => {
-        this.forSigning = forSigning;
+        this.forSigning = forSigning.docs;
         this.loading = false;
       });
     } catch (error) {
       console.log("Ошибка при получении заявок на подписание:", error);
     }
-  }
+  };
 
   createSign = async (newSign) => {
     try {
