@@ -28,10 +28,10 @@ const Paths = {
     Base: '/docs',
 
     Create: '/create',
-    Send: '/send/:id',
+    Send: '/send/:id_doc',
     Sign: '/sign',
-    GetCreated: '/created',
-    GetForSign: '/forsign'
+    GetCreated: '/created/:id_user',
+    GetForSign: '/forsign/:id_user'
   }
 };
 

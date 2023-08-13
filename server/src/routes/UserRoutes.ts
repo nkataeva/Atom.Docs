@@ -50,8 +50,13 @@ async function delete_(req: IReq, res: IRes) {
 async function getLogonUser(req: IReq, res: IRes) {
   // Get session data
   const sessionData = await SessionUtil.getSessionData<ISessionData>(req);
+  const user = await UserService.getUser((sessionData as ISessionData).id);
 
-  return res.status(HttpStatusCodes.OK).json({ sessionData });
+  return res.status(HttpStatusCodes.OK).json({ 
+    id: user?.id,
+    login: user?.login,
+    fio: user?.fio 
+  });
 }
 
 

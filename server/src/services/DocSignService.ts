@@ -3,21 +3,35 @@ import DocSign from '@src/models/DocSign';
 /**
  * Create new document.
  */
-async function create(docId: number, signerId: number) {
+async function create(idDoc: number, idSigner: number) {
   const docSign = await DocSign.create(
     {
-       docId: docId,
-       signerId: signerId
+       docId: idDoc,
+       signerId: idSigner
      }
    );
   
    return docSign;
- }
+}
+
+/**
+ * Get docs for sign
+ */
+async function findDocsForSign(idSigner: number) {
+    return DocSign.findAll({
+        where: {
+            signerId: idSigner,
+            status: 0
+        }
+    })
+}
+  
 
  // **** Export default **** //
 
 export default {
     create,
- } as const;
+    findDocsForSign,
+} as const;
  
  

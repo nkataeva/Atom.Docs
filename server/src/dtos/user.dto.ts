@@ -9,8 +9,15 @@ export interface IUserData {
 
 // Данные, передаваемые при авторизации
 export interface ILoginData {
-    login: string,
-    password: string
+    login: string;
+    password: string;
+}
+
+// Данные, возвращаемые как информация о пользователе
+export interface IUserInfo {
+    id: number;
+    login: string;
+    fio: string;
 }
 
 // Данные, хранимые в сессии

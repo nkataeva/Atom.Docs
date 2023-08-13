@@ -13,7 +13,7 @@ export const DOC_NOT_FOUND_ERR = 'Документ не найден';
  * Create new document.
  */
 async function create(docData: IDocData) {
-   const doc = await Document.create(
+  const doc = await Document.create(
     {
       typeId: docData.id_type,
       ownerId: docData.id_user,
@@ -61,6 +61,33 @@ async function send(docId: number, signers: number[]) {
   }
 }
 
+/**
+ * Get documents for sign
+ */
+async function getForSign(signerId: number) {
+  const docsForSign = await DocSignService.findDocsForSign(signerId);
+
+  const docsObjectsForSign = Array();
+  for (const docSign of docsForSign) {
+    const doc = await Document.findByPk(docSign.docId);
+    docsObjectsForSign.push(doc);
+  }
+
+  return docsObjectsForSign;
+}
+
+/**
+ * Get created documents
+ */
+async function getCreated(userId: number) {
+  return Document.findAll({
+    where: {
+      ownerId: userId
+    }
+  })
+}
+
+
 
 // /**
 //  * Delete a user by their id.
@@ -82,8 +109,10 @@ async function send(docId: number, signers: number[]) {
 // **** Export default **** //
 
 export default {
-   create,
-   send,
+  create,
+  send,
+  getCreated,
+  getForSign,
   //  sign,
   //  getCreated,
 } as const;

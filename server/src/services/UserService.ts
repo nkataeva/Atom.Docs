@@ -111,6 +111,13 @@ async function _delete(usrId: number) {
   await usr.destroy();
 }
 
+/**
+ * Get user by ID
+ */
+async function getUser(id: number) {
+  return await User.findByPk(id);
+}
+
 
 // **** Export default **** //
 
@@ -119,4 +126,5 @@ export default {
   register,
   update,
   delete: _delete,
+  getUser
 } as const;

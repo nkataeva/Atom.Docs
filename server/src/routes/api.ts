@@ -102,28 +102,20 @@ docRouter.post(
 //   DocRoutes.sign,
 //  );
  
-//  // Get created documents 
-//  docRouter.get(
-//   Paths.Docs.GetCreated,
-//   DocRoutes.getCreated,
-//  );
+ // Get created documents 
+ docRouter.get(
+  Paths.Docs.GetCreated,
+  DocRoutes.getCreated,
+ );
 
-
-// // Get documents to sign
-// docRouter.get(
-//   Paths.Docs.GetForSign,
-//   UserRoutes.getLogonUser
-// );
-
-// //Get docs user
-// docRouter.put(
-//   Paths.Docs.GetDocsUser,
-//   validate('id_user'),
-//   DocRoutes.getDocsUserSign,
-//  );
+//Get user docs for sign
+docRouter.get(
+  Paths.Docs.GetForSign,
+  DocRoutes.getForSign,
+ );
  
 //  //Get docs user for sign
-//  docRouter.put(
+//  docRouter.put(Us
 //   Paths.Docs.GetDocsUserSign,
 //   validate('id_user'),
 //   DocRoutes.getDocsUserSign,
@@ -131,7 +123,7 @@ docRouter.post(
 
 
 // Add UserRouter
-apiRouter.use(Paths.Docs.Base, adminMw, docRouter);
+apiRouter.use(Paths.Docs.Base,  adminMw, docRouter);
 
 
 // **** Export default **** //

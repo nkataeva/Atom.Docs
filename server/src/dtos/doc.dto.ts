@@ -10,5 +10,7 @@ export interface IDocData {
       reason:  string,
       dt_start: Date,
       duration: number
-    } 
+    };
+    
+    signers: number[];
 }

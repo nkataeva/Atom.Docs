@@ -40,7 +40,13 @@ http://localhost:3001/api/users/logon
 
 Параметров нет
 
-Возврат: Авторизованный пользователь
+Возврат: Информация об авторизованном пользователе в формате 
+
+{
+    "id": 1,
+    "login": "login",
+    "fio": "fio"
+}
 
 /* ------------------------------ */
 /* Получение списка пользователей */
@@ -91,6 +97,7 @@ http://localhost:3001/api/docs/create
         "content": "Give me money, please",
         "reason": "Need more and more"
     }
+    "signers": [ 2, 3, 5 ]
 }
 
 Возврат: (Примечание: возвращается Id нового документа, для дальнейшей отправки на подпись)
@@ -103,7 +110,7 @@ http://localhost:3001/api/docs/create
 
 Тип: POST
 
-http://localhost:3001/api/docs/send
+http://localhost:3001/api/docs/send/:id_doc
 
 [ 2, 3, 5 ]
 
@@ -115,10 +122,10 @@ http://localhost:3001/api/docs/send
 
 Тип: PUT
 
-http://localhost:3001/api/docs/sign
+http://localhost:3001/api/docs/sign/:id_doc
 
-{ "id_user" : 3,
-  "id_app" : 2
+{ 
+    "id_user" : 3,
 }
 
 Возврат: 200OK
@@ -129,9 +136,9 @@ http://localhost:3001/api/docs/sign
 
 Тип: GET
 
-http://localhost:3001/api/docs/created
+http://localhost:3001/api/docs/created/:id_user
 
-{ "id_user" : 3 }
+Параметров нет
 
 Возврат: Список заявок
 
@@ -141,8 +148,8 @@ http://localhost:3001/api/docs/created
 
 Тип: GET
 
-http://localhost:3001/api/docs/forsign
+http://localhost:3001/api/docs/forsign/:id_user
 
-{ "id_user" : 3 }
+Параметров нет
 
 Возврат: Список заявок

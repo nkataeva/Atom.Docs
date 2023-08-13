@@ -12,7 +12,12 @@ import { IReq, IRes } from './types/express/misc';
 async function create(req: IReq<IDocData>, res: IRes) {
   const docData = req.body;
   const newDoc = await DocService.create(docData);
-  return res.status(HttpStatusCodes.CREATED).json({"id" : newDoc.id}).end();
+
+  if (docData.signers !== undefined) {
+    await DocService.send(newDoc.id, docData.signers);
+  }
+
+  return res.status(HttpStatusCodes.CREATED).json({ "id": newDoc.id }).end();
 }
 
 /**
@@ -25,6 +30,25 @@ async function send(req: IReq<number[]>, res: IRes) {
   return res.status(HttpStatusCodes.OK).end();
 }
 
+/**
+ * Get docs created by user.
+ */
+async function getCreated(req: IReq, res: IRes) {
+  const idUser = +req.params.id_user;
+  const docs = await DocService.getCreated(idUser);
+  return res.status(HttpStatusCodes.OK).json({ docs });
+}
+
+/**
+ * Get docs for sign.
+ */
+async function getForSign(req: IReq, res: IRes) {
+  const idUser = +req.params.id_user;
+  const docs = await DocService.getForSign(idUser);
+
+  return res.status(HttpStatusCodes.OK).json({ docs });
+}
+
 // /**
 //  * Sign document.
 //  */
@@ -33,14 +57,6 @@ async function send(req: IReq<number[]>, res: IRes) {
 // //  const id = +req.params.id;
 // //  await DocService.update(id, usrData);
 // //  return res.status(HttpStatusCodes.OK).end();
-// }
-
-// /**
-//  * Get docs created by user.
-//  */
-// async function getCreated(req: IReq, res: IRes) {
-// //  const users = await UserService.getAll();
-// //  return res.status(HttpStatusCodes.OK).json({ users });
 // }
 
 
@@ -67,8 +83,8 @@ async function send(req: IReq<number[]>, res: IRes) {
 // // **** Export default **** //
 
 export default {
-   create,
-   send,
-//   sign,
-//   getCreated,
+  create,
+  send,
+  getCreated,
+  getForSign,
 } as const;
