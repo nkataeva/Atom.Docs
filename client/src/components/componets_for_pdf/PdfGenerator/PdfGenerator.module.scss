@@ -1,0 +1,30 @@
+@import "../../../styles/vars.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+}
+
+.select {
+  div {
+    font-family: "Ysabeau SC", sans-serif !important;
+    font-size: 20px !important;
+    background-color: $black !important;
+    color: $textColor !important;
+    border: 1px solid $btnColor !important;
+    span {
+      color: $textColor !important;
+    }
+  }
+  span {
+    color: $textColor !important;
+  }
+}
+
+.selectList {
+  font-family: "Ysabeau SC", sans-serif !important;
+  div {
+    font-size: 20px !important;
+  }
+}
