@@ -1,19 +1,47 @@
 .text-field {
-  margin-bottom: 20px;
+  color: #131415;
+  background-color: #131415;
+  display: grid;
+  grid-template-columns: 1fr; /* Один столбец для мобильных экранов */
+  grid-gap: 10px; /* Промежуток между полями */
 
-  .text-field__label {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: #333;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* Два столбца для экранов шире 768px */
   }
 
   .text-field__input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    color: #999999;
+    border-radius: 10px;
+    border: 1px solid #7290BD;
+    background-color: #131415;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+    width: 100%; /* Ширина на 100% для адаптивности */
+    padding: 10px; /* Добавим отступ для визуального разделения */
+
+    &::placeholder {
+      color: #999; /* Цвет подсказки */
+    }
   }
+}
+.button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  justify-content: center; 
+}
+
+.btn{
+  display: flex;
+  width: 272px;
+  padding: 15px 35px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 23px;
+  background: #7290BD;
 }
 container {
   padding: 30px;

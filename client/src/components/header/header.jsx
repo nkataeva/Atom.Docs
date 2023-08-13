@@ -55,7 +55,7 @@ const Header = observer(() => {
           placement="bottomRight"
         >
           <Space>
-            {user?.login}
+            {user?.fio}
             <AvatarIcon width={"35px"} height={"35px"} />
           </Space>
         </Dropdown>

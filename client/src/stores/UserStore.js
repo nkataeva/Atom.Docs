@@ -5,12 +5,14 @@ class User {
   user = null;
   isUserAuth = false;
   users = [];
+  loading = false;
 
   constructor() {
     makeObservable(this, {
       user: observable,
       isUserAuth: observable,
       users: observable,
+      loading: observable,
       createUser: action,
       logOut: action,
       authUser: action,
@@ -50,7 +52,7 @@ class User {
     try {
       const user = await AuthService.requestUser();
       runInAction(() => {
-        this.user = user.sessionData;
+        this.user = user;
       });
     } catch (error) {
       console.log(error, "Ошибка загрузки данных пользователя");
@@ -59,9 +61,10 @@ class User {
 
   getAllUser = async () => {
     try {
+      this.loading = true;
       const users = await AuthService.requestAllUser();
       runInAction(() => {
-        this.users = users.sessionData;
+        this.users = users.users;
       });
     } catch (error) {
       console.error(error, "Ошибка получения пользователя");

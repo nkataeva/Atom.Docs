@@ -1,82 +1,76 @@
-import { makeObservable, action, observable } from "mobx";
+import { makeObservable, action, observable, runInAction } from "mobx";
+import { SignService } from "../http/services/signService";
+import userStore from "./UserStore";
 
 class Signs {
   mySign = [];
   forSigning = [];
   currentSign = null;
+  createdNewSign = false;
+  signing = false;
+  loading = false;
 
   constructor() {
     makeObservable(this, {
       mySign: observable,
       forSigning: observable,
       currentSign: observable,
+      createdNewSign: observable,
+      signing: observable,
       fetchSign: action,
+      createSign: action,
+      fetchMySign: action,
+      fetchForSigning: action,
     });
   }
 
-  async fetchSign(id) {
+  async fetchSign(data) {
     try {
-      const response = await fetch(`/api/sign/${id}`);
-      if (response.ok) {
-        const data = response.json();
-        console.log(data);
-        this.currentSign = data;
-      } else {
-        throw new Error(response.status);
-      }
+      await SignService.createNewSign(data);
+      runInAction(() => {
+        this.signing = true;
+      });
     } catch (error) {
-      console.log("Ошибка при получении конкретной заявки:", error);
+      console.log("Ошибка при подписании заявки:", error);
     }
   }
 
-  async fetchMySign() {
+  fetchMySign = async () => {
     try {
-      const response = await fetch(`/api/sign/my`);
-      if (response.ok) {
-        const data = response.json();
-        console.log(data);
-        this.mySign = data;
-      } else {
-        throw new Error(response.status);
-      }
+      this.loading = true;
+      const mySign = await SignService.requestCreatedSign(userStore.user?.id);
+      runInAction(() => {
+        this.mySign = mySign.docs;
+        this.loading = false;
+      });
     } catch (error) {
       console.log("Ошибка при получении созданных заявок:", error);
     }
-  }
+  };
 
-  async fetchForSigning() {
+  fetchForSigning = async () => {
     try {
-      const response = await fetch(`/api/sign/for`);
-      if (response.ok) {
-        const data = response.json();
-        console.log(data);
-        this.forSigning = data;
-      } else {
-        throw new Error(response.status);
-      }
+      this.loading = true;
+      const forSigning = await SignService.requestSignForMe(userStore.user?.id);
+      runInAction(() => {
+        this.forSigning = forSigning.docs;
+        this.loading = false;
+      });
     } catch (error) {
       console.log("Ошибка при получении заявок на подписание:", error);
     }
-  }
+  };
 
-  async createPost(newSign) {
+  createSign = async (newSign) => {
     try {
-      const response = await fetch("/api/sign/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newSign),
+      await SignService.createNewSign(newSign);
+      runInAction(() => {
+        this.createdNewSign = true;
       });
-
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return true;
     } catch (error) {
       console.error("Произошла ошибка при создании поста:", error);
     }
-  }
+  };
 }
 
 const signsStore = new Signs();

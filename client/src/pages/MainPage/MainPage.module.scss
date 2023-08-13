@@ -1,8 +1,13 @@
-@import '../../styles/vars.scss';
+@import "../../styles/vars.scss";
 
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+}
+
+.nullMySign {
+  font-size: 20px;
+  margin-top: 60%;
 }
