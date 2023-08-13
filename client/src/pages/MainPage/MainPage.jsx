@@ -23,8 +23,13 @@ const MainPage = () => {
 
   return (
     <div className={styles.main}>
-      <Search input={inputValue} setInput={setInputValue} />
+      {mySign.length > 0 && (
+        <Search input={inputValue} setInput={setInputValue} />
+      )}
       {mySign.length > 0 && <Table data={filteredData} />}
+      {mySign.length === 0 && (
+        <div className={styles.nullMySign}>Нет созданных заявок</div>
+      )}
     </div>
   );
 };
