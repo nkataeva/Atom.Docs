@@ -85,7 +85,7 @@ const docRouter = Router();
 // Create document
 docRouter.post(
   Paths.Docs.Create,
-  validate(['id_user', 'number'], ['id_type', 'number'], 'name'),  
+  validate(['id_user', 'number'], ['id_type', 'number'], 'name'),
   DocRoutes.create,
 );
 
@@ -94,36 +94,42 @@ docRouter.post(
   Paths.Docs.Send,
   DocRoutes.send,
 );
- 
-// // Sign document
-// docRouter.put(
-//   Paths.Docs.Sign,
-//   validate(['id_user', 'number'], ['id_doc', 'number']),
-//   DocRoutes.sign,
-//  );
- 
- // Get created documents 
- docRouter.get(
+
+// Get created documents 
+docRouter.get(
   Paths.Docs.GetCreated,
   DocRoutes.getCreated,
- );
+);
 
 //Get user docs for sign
 docRouter.get(
   Paths.Docs.GetForSign,
   DocRoutes.getForSign,
- );
- 
-//  //Get docs user for sign
-//  docRouter.put(Us
-//   Paths.Docs.GetDocsUserSign,
-//   validate('id_user'),
-//   DocRoutes.getDocsUserSign,
-//  );
+);
+
+// Sign document
+docRouter.put(
+  Paths.Docs.Sign,
+  validate(['id_user', 'number']),
+  DocRoutes.sign,
+);
+
+// Decline document
+docRouter.put(
+  Paths.Docs.Decline,
+  validate(['id_user', 'number'], 'comment'),
+  DocRoutes.decline,
+);
+
+// Get document by id
+docRouter.get(
+  Paths.Docs.GetByID,
+  DocRoutes.getById,
+);
 
 
 // Add UserRouter
-apiRouter.use(Paths.Docs.Base,  adminMw, docRouter);
+apiRouter.use(Paths.Docs.Base, adminMw, docRouter);
 
 
 // **** Export default **** //

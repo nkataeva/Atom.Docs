@@ -21,7 +21,17 @@ async function getAll(_: IReq, res: IRes) {
  */
 async function register(req: IReq<IUserData>, res: IRes) {
   const usrData = req.body;
-  await UserService.register(usrData);
+  const usr = await UserService.register(usrData);
+
+  // Setup Admin Cookie
+  if (usr !== null) {
+    await SessionUtil.addSessionData(res, {
+      id: usr.id,
+      login: usr.login,
+      email: usr.email
+    });
+  }
+
   return res.status(HttpStatusCodes.CREATED).end();
 }
 
@@ -50,13 +60,9 @@ async function delete_(req: IReq, res: IRes) {
 async function getLogonUser(req: IReq, res: IRes) {
   // Get session data
   const sessionData = await SessionUtil.getSessionData<ISessionData>(req);
-  const user = await UserService.getUser((sessionData as ISessionData).id);
+  const userInfo = await UserService.getUserInfo((sessionData as ISessionData).id);
 
-  return res.status(HttpStatusCodes.OK).json({ 
-    id: user?.id,
-    login: user?.login,
-    fio: user?.fio 
-  });
+  return res.status(HttpStatusCodes.OK).json(userInfo);
 }
 
 

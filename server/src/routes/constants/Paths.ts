@@ -29,9 +29,11 @@ const Paths = {
 
     Create: '/create',
     Send: '/send/:id_doc',
-    Sign: '/sign',
+    Sign: '/sign/:id_doc',
+    Decline: '/decline/:id_doc',
     GetCreated: '/created/:id_user',
-    GetForSign: '/forsign/:id_user'
+    GetForSign: '/forsign/:id_user',
+    GetByID: '/get/:id_doc'
   }
 };
 

@@ -1,6 +1,6 @@
 import PwdUtil from '@src/util/PwdUtil';
 import User from '@src/models/User';
-import { IUserData } from '@src/dtos/user.dto';
+import { IUserData, userToUserInfo } from '@src/dtos/user.dto';
 import { RouteError } from '@src/other/classes';
 import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
@@ -118,6 +118,22 @@ async function getUser(id: number) {
   return await User.findByPk(id);
 }
 
+/**
+ * Get user info by ID
+ */
+async function getUserInfo(id: number) {
+  const usr = await User.findByPk(id);
+  if (usr === null) {
+    throw new RouteError(
+      HttpStatusCodes.NOT_FOUND,
+      USER_NOT_FOUND_ERR,
+    );
+  }
+
+  return userToUserInfo(usr);
+}
+
+
 
 // **** Export default **** //
 
@@ -126,5 +142,5 @@ export default {
   register,
   update,
   delete: _delete,
-  getUser
+  getUserInfo
 } as const;

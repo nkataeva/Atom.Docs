@@ -21,4 +21,8 @@ export default class DocSign extends Model {
     @AllowNull(false)
     @Column(DataType.SMALLINT)
     status!: number;
+
+    // статус
+    @Column(DataType.TEXT)
+    comment!: string;
 }

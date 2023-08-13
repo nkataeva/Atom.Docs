@@ -1,7 +1,7 @@
 import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
 import DocService from '@src/services/DocService';
-import { IDocData } from '@src/dtos/doc.dto';
+import { IDocData, IDocSignData } from '@src/dtos/doc.dto';
 import { IReq, IRes } from './types/express/misc';
 
 // **** Functions **** //
@@ -49,35 +49,35 @@ async function getForSign(req: IReq, res: IRes) {
   return res.status(HttpStatusCodes.OK).json({ docs });
 }
 
-// /**
-//  * Sign document.
-//  */
-// async function sign(req: IReq<IDocSign>, res: IRes) {
-// //  const usrData = req.body;
-// //  const id = +req.params.id;
-// //  await DocService.update(id, usrData);
-// //  return res.status(HttpStatusCodes.OK).end();
-// }
+/**
+ * Sign document.
+ */
+async function sign(req: IReq<IDocSignData>, res: IRes) {
+  const signData = req.body;
+  const idDoc = +req.params.id_doc;
+  await DocService.sign(idDoc, signData);
+  return res.status(HttpStatusCodes.OK).end();
+}
 
+/**
+ * Decline document.
+ */
+async function decline(req: IReq<IDocSignData>, res: IRes) {
+  const declineData = req.body;
+  const idDoc = +req.params.id_doc;
+  await DocService.decline(idDoc, declineData);
+  return res.status(HttpStatusCodes.OK).end();
+}
 
-// /**
-//  * Delete one user.
-//  */
-// async function delete_(req: IReq, res: IRes) {
-//   const id = +req.params.id;
-//   await UserService.delete(id);
-//   return res.status(HttpStatusCodes.OK).end();
-// }
+/**
+ * Get document data
+ */
+async function getById(req: IReq, res: IRes) {
+  const idDoc = +req.params.id_doc;
+  const doc = await DocService.getById(idDoc);
 
-// /**
-//  * Get session user.
-//  */
-// async function getLogonUser(req: IReq, res: IRes) {
-//   // Get session data
-//   const sessionData = await SessionUtil.getSessionData<ISessionData>(req);
-
-//   return res.status(HttpStatusCodes.OK).json({ sessionData });
-// }
+  return res.status(HttpStatusCodes.OK).json(doc);
+}
 
 
 // // **** Export default **** //
@@ -87,4 +87,7 @@ export default {
   send,
   getCreated,
   getForSign,
+  sign,
+  decline,
+  getById,
 } as const;
