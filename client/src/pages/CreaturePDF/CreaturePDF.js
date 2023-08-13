@@ -4,7 +4,7 @@ import "./CreaturePDF.scss";
 import userStore from "../../stores/UserStore";
 
 const CreaturePDF = () => {
-  const { getAllUser } = userStore;
+  const { getAllUser,user,users } = userStore;
   const data = [
     {
       userName: "John",
@@ -33,9 +33,6 @@ const CreaturePDF = () => {
     // добавьте еще объекты по аналогии
   ];
 
-  useEffect(() => {
-    getAllUser();
-  }, [getAllUser]);
 
   const randomIndex = Math.floor(Math.random() * data.length);
   const randomObject = data[randomIndex];
