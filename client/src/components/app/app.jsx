@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { APPRoute } from "../../const";
 import ProtectedRoute from "../protected-route/protected-route";
+import CreaturePDF from "../../pages/CreaturePDF/CreaturePDF";
 
 const MainLayout = lazy(() => import("../mainLayout/mainLayout"));
 const UserLayout = lazy(() => import("../userLayout/userLayout"));
@@ -16,7 +17,7 @@ const ForSigningPage = lazy(() =>
 );
 const SigningPage = lazy(() => import("../../pages/SigningPage/SigningPage"));
 const ShowApplication = lazy(() => import("../show/show"));
-const Creature = lazy(() => import("../creature/creature"));
+//const CreaturePDf = lazy(() => import("../pages/CreaturePDF/CreaturePDF"));
 const SignPage = lazy(() => import("../../pages/SignPage/SignPage"));
 const NotFoundScreen = lazy(() =>
   import("../not-found-screen/not-found-screen")
@@ -49,7 +50,7 @@ const App = () => {
               <Route path={APPRoute.SHOW} element={<ShowApplication />} />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path={APPRoute.CREATURE} element={<Creature />} />
+              <Route path={APPRoute.CREATURE} element={<CreaturePDF />} />
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path={APPRoute.SIGN} element={<SignPage />} />
