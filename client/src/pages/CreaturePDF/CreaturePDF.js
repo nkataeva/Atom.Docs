@@ -1,10 +1,7 @@
-import { useEffect } from "react";
 import PDFGenerator from "../../components/componets_for_pdf/PdfGenerator/PdfGenerator";
-import "./CreaturePDF.scss";
-import userStore from "../../stores/UserStore";
+import style from "./CreaturePDF.module.scss";
 
 const CreaturePDF = () => {
-  const { getAllUser,user,users } = userStore;
   const data = [
     {
       userName: "John",
@@ -33,17 +30,13 @@ const CreaturePDF = () => {
     // добавьте еще объекты по аналогии
   ];
 
-
   const randomIndex = Math.floor(Math.random() * data.length);
   const randomObject = data[randomIndex];
 
   return (
-    <div className="creature-pdf-container">
-      <div className="pdf-generator">
-        <h1 className="pdf-title">Сгенерированное заявление</h1>
-        <PDFGenerator obj={randomObject} />
-        <button className="pdf-button">Сгенерировать новое</button>
-      </div>
+    <div className={style.container}>
+      <h1 className={style.title}>Создание заявки</h1>
+      <PDFGenerator obj={randomObject} />
     </div>
   );
 };
