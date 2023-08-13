@@ -32,5 +32,5 @@ export const getRequest = (url, body, headers) =>
 export const postRequest = (url, body, headers) =>
   request(url, "POST", headers, body);
 
-export const patchRequest = (url, body, headers) =>
-  request(url, "PATCH", headers, body);
+export const putRequest = (url, body, headers) =>
+  request(url, "PUT", headers, body);
