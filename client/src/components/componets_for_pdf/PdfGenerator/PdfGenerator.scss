@@ -5,11 +5,67 @@
 @media (max-width: 768px) {
   padding: 10px;
 }
-.form-select{
-  border-radius: 62px;
-  background: #131415;
-  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.25);
-}
+  .user-select {
+    .react-select__control {
+      border-radius: 10px;
+      border: 1px solid #7290BD;
+      background-color: #131415;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 100;
+      line-height: normal;
+      width: 100%;
+      padding: 10px;
+
+      &:hover {
+        border-color: #4A90E2;
+      }
+
+      &::placeholder {
+        color: #999; /* Цвет подсказки */
+      }
+    }
+
+    .react-select__value-container {
+      padding: 0;
+    }
+  }
+  .form-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+
+    select {
+      appearance: none;
+      border-radius: 10px;
+      border: 1px solid #7290BD;
+      background-color: #131415;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 100;
+      line-height: normal;
+      padding: 10px 10px 10px 10px;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+        border-color: #4A90E2;
+      }
+    }
+
+    &:after {
+      content: '▼';
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 18px;
+      pointer-events: none;
+    }
+  }
+
 .pdf-title {
   font-size: 24px;
   margin-bottom: 20px;

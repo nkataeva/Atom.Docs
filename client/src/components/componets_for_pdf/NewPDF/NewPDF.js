@@ -26,7 +26,7 @@ Font.register({
 const NewPDF = (props) => {
     const [textinput, setTextinput] = useState('');
     const [textfactory, setTextfactory] = useState('');
-    const [textDayCount, setTextDayCount] = useState(7);
+    const [textDayCount, setTextDayCount] = useState('');
     const [texttarget, setTexttarget] = useState('');
     const [content, setContent] = useState(''); 
     const [justification, setJustification] = useState('');
@@ -35,43 +35,81 @@ const NewPDF = (props) => {
         <div>
           {props.captionRequest === 'Заявка на информационный обмен' && (
             <div className="text-field">
-              <label className="text-field__label">Введите информацию про ваше место назначения (адрес организации) :</label>
-              <input className="text-field__input" type="text" value={textfactory} onChange={e => setTextfactory(e.target.value)} />
-              <p />
-              <label className="text-field__label">Введите информацию про ваши тезисы :</label>
-              <input className="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
-              <p/>
-              <label className="text-field__label">Введите содержание :</label>
-              <input className="text-field__input" type="text" value={content} onChange={e => setContent(e.target.value)} />
-              <p/>
-              <label className="text-field__label">Введите обоснование :</label>
-              <input className="text-field__input" type="text" value={justification} onChange={e => setJustification(e.target.value)} />
+                <input
+                    className="text-field__input"
+                    type="text"
+                    value={textfactory}
+                    onChange={(e) => setTextfactory(e.target.value)}
+                    placeholder="Адрес организации"
+                />
+                <input
+                    className="text-field__input"
+                    type="text"
+                    value={textinput}
+                    onChange={(e) => setTextinput(e.target.value)}
+                    placeholder="Тезисы"
+                />
+                <input
+                    className="text-field__input"
+                    type="text"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="Содержание"
+                />
+                <input
+                    className="text-field__input"
+                    type="text"
+                    value={justification}
+                    onChange={(e) => setJustification(e.target.value)}
+                    placeholder="Обоснование"
+                />
             </div>
           )}
           {props.captionRequest === 'Заявка для направления в командировку/для направления в служебную поездку' && (
-            <div className="text-field">
-              <label className="text-field__label">Введите информацию про ваше место назначения (адрес организации) :</label>
-              <input className="text-field__input" type="text" value={textinput} onChange={e => setTextinput(e.target.value)} />
-              <p />
-              <label className="text-field__label">Введите информацию про количество календарных дней для пребывания :</label>
-              <input className="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
-              <p />
-              <label className="text-field__label">Введите информацию про цель поездки:</label>
-              <input className="text-field__input" type="text" value={texttarget} onChange={e => setTexttarget(e.target.value)} />
-            </div>
+              <div className="text-field">
+                  <input
+                      className="text-field__input"
+                      type="text"
+                      value={textfactory}
+                      onChange={(e) => setTextfactory(e.target.value)}
+                      placeholder="Адрес организации"
+                  />
+                  <input
+                      className="text-field__input"
+                      type="text"
+                      value={textDayCount}
+                      onChange={e => setTextDayCount(e.target.value)}
+                      placeholder="Количество дней"
+                  />
+                  <input
+                      className="text-field__input"
+                      type="text"
+                      value={texttarget}
+                      onChange={e => setTexttarget(e.target.value)}
+                      placeholder="Цель поездки"
+                  />
+              </div>
           )}
           {props.captionRequest === 'Заявка на предоставление отпуска' && (
           <div className="text-field">
-            <label className="text-field__label">Введите информацию про начало отпуска:</label>
-            <input className="text-field__input" type="text" value={textDayCount} onChange={e => setTextDayCount(e.target.value)} />
-            <p />
+              <input
+                  className="text-field__input"
+                  type="text"
+                  value={textDayCount}
+                  onChange={e => setTextDayCount(e.target.value)}
+                  placeholder="Количество дней"
+              />
             </div>
           )}
           {props.captionRequest === 'Заявление на увольнение' && (
           <div className="text-field">
-            <label className="text-field__label">Введите информацию про причину увольнения :</label>
-            <input className="text-field__input" type="text" value={content} onChange={e => setContent(e.target.value)} />
-            <p />
+              <input
+                  className="text-field__input"
+                  type="text"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="Содержание"
+              />
             </div>
           )}
         </div>

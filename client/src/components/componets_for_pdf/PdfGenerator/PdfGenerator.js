@@ -56,6 +56,7 @@ const PdfGenerator = ({ obj }) => {
                     value={selectedUser}
                     onChange={handleUserChange}
                     placeholder="Выберите пользователя"
+                    classNamePrefix="react-select"
                 />
             </div>
             <div className="pdf-preview">

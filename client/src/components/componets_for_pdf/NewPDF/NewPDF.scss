@@ -1,29 +1,31 @@
 .text-field {
-  border-radius: 62px;
-  background: #131415;
-  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.25);
+  color: #131415;
+  background-color: #131415;
+  display: grid;
+  grid-template-columns: 1fr; /* Один столбец для мобильных экранов */
+  grid-gap: 10px; /* Промежуток между полями */
 
-  .text-field__label {
-    color: #E7DBF4;
-    font-family: Ysabeau SC;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 100;
-    line-height: normal;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* Два столбца для экранов шире 768px */
   }
 
   .text-field__input {
-    color: #131415;
+    border-radius: 10px;
+    border: 1px solid #7290BD;
+    background-color: #131415;
     font-size: 18px;
     font-style: normal;
     font-weight: 100;
     line-height: normal;
-    width: 100%; /* Изменяем ширину на 100% для мобильных устройств */
+    width: 100%; /* Ширина на 100% для адаптивности */
+    padding: 10px; /* Добавим отступ для визуального разделения */
 
-   
+    &::placeholder {
+      color: #999; /* Цвет подсказки */
+    }
   }
-
 }
+
 container {
   padding: 30px;
 }
