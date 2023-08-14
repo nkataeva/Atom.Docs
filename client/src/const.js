@@ -8,6 +8,7 @@ export const APPRoute = {
   SHOW: "/show",
   CREATURE: "/creature",
   SIGN: "/sign",
+  ID: "/:id",
   NOTFOUND: `*`,
 };
 

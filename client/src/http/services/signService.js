@@ -6,7 +6,9 @@ const createNewSign = (body) =>
 const sendForSign = (data) =>
   postRequest(`http://localhost:3001/api/docs/send/${data.id}`, data.body);
 
-const sign = (body) => putRequest(`http://localhost:3001/api/docs/sign`, body);
+const sign = (body, id) => putRequest(`http://localhost:3001/api/docs/sign/${id}`, body);
+
+const reject = (body, id) => putRequest(`http://localhost:3001/api/docs/decline/${id}`, body)
 
 const requestCreatedSign = (id) =>
   getRequest(`http://localhost:3001/api/docs/created/${id}`);
@@ -14,10 +16,15 @@ const requestCreatedSign = (id) =>
 const requestSignForMe = (id) =>
   getRequest(`http://localhost:3001/api/docs/forsign/${id}`);
 
+const requestSignInfo = (id) =>
+  getRequest(`http://localhost:3001/api/docs/get/${id}`);
+
 export const SignService = {
   createNewSign,
   sendForSign,
   sign,
+  reject,
   requestCreatedSign,
   requestSignForMe,
+  requestSignInfo,
 };

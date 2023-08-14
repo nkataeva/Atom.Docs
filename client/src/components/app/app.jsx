@@ -43,7 +43,7 @@ const App = () => {
               <Route path={APPRoute.FORSIGNING} element={<ForSigningPage />} />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path={APPRoute.SIGNING} element={<SigningPage />} />
+              <Route path={APPRoute.SIGNING + APPRoute.ID} element={<SigningPage />} />
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path={APPRoute.SHOW} element={<ShowApplication />} />
@@ -52,7 +52,7 @@ const App = () => {
               <Route path={APPRoute.CREATURE} element={<CreaturePDF />} />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path={APPRoute.SIGN} element={<SignPage />} />
+              <Route path={APPRoute.SIGN + APPRoute.ID} element={<SignPage />} />
             </Route>
           </Route>
           <Route path={APPRoute.NOTFOUND} element={<NotFoundScreen />} />

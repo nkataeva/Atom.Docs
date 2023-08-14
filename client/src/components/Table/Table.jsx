@@ -9,12 +9,16 @@ import blueSign from '../../assets/signBlue.svg';
 // import greenSign from '../../assets/signGreen.svg';
 import { observer } from "mobx-react-lite";
 
-const Table = observer (({ data, sign }) => {
+const Table = ({ data, sign }) => {
     const navigate = useNavigate();
 
-    const openSign = () => {
+    const openSign = (id) => {
         if (!sign)
-            navigate(APPRoute.SIGN)
+        navigate(`${APPRoute.SIGN}/${id}`);
+    }
+
+    const openSigning = (id) => {
+        navigate(`${APPRoute.SIGNING}/${id}`);
     }
 
     return (
@@ -33,17 +37,17 @@ const Table = observer (({ data, sign }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index}>
+                    {data.map((row) => (
+                        <tr key={row.id}>
                             {!sign && <td className={styles.sign}>
-                                <img src={blueSign} alt="sign" onClick={openSign} />
+                                <img src={blueSign} alt="sign" onClick={() => openSign(row.id)} />
                             </td>}
                             {Object.values(row).map((value, innerIndex) => (
                                 <td key={innerIndex}>{value}</td>
                             ))}
                             {sign && (
                                 <td>
-                                    <img src={signing} alt="Signing" onClick={() => navigate(APPRoute.SIGNING)} />
+                                    <img src={signing} alt="Signing" onClick={() => openSigning(row.id)} />
                                 </td>
                             )}
                         </tr>
@@ -53,7 +57,7 @@ const Table = observer (({ data, sign }) => {
             </table>
         </div>
     )
-})
+}
 
 Table.defaultProps = {
     sign: false,

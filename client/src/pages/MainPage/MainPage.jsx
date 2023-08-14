@@ -7,29 +7,28 @@ import signsStore from "../../stores/SignStore";
 import userStore from "../../stores/UserStore";
 import { observer } from "mobx-react-lite";
 
-const MainPage = observer (() => {
+const MainPage = observer(() => {
   const [inputValue, setInputValue] = React.useState("");
   const { fetchMySign, mySign } = signsStore;
   const { user } = userStore;
-  const [data, setData] = React.useState([]);
 
   useEffect(() => {
     if (user) {
       fetchMySign();
-      const transformedArray = mySign.map(el => {
-        const [datePart, timePart] = el.dt_create.split("T");
-        return {
-          id: el.id,
-          id_user: user.fio,
-          name: el.name,
-          dt_create: datePart,
-        };
-      });
-      setData(transformedArray)
     }
-  }, [user, fetchMySign]);
+  }, [user]);
 
-  const filteredData = data?.filter((value) => {
+  const transformedArray = mySign.map(el => {
+    const [datePart, timePart] = el.dt_create.split("T");
+    return {
+      id: el.id,
+      id_user: user?.fio,
+      name: el.name,
+      dt_create: datePart,
+    };
+  });
+
+  const filteredData = transformedArray?.filter((value) => {
     return value.name.toLowerCase().includes(inputValue.toLowerCase());
   });
 

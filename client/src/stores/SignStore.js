@@ -18,20 +18,33 @@ class Signs {
       createdNewSign: observable,
       signing: observable,
       fetchSign: action,
+      rejectSign: action,
       createSign: action,
       fetchMySign: action,
       fetchForSigning: action,
+      getSign: action
     });
   }
 
-  async fetchSign(data) {
+  async fetchSign(data, id) {
     try {
-      await SignService.createNewSign(data);
+      await SignService.sign(data, id);
       runInAction(() => {
         this.signing = true;
       });
     } catch (error) {
       console.log("Ошибка при подписании заявки:", error);
+    }
+  }
+
+  async rejectSign(data, id) {
+    try {
+      await SignService.reject(data, id);
+      runInAction(() => {
+        this.signing = true;
+      });
+    } catch (error) {
+      console.log("Ошибка при отклонении заявки:", error);
     }
   }
 
@@ -71,6 +84,17 @@ class Signs {
       console.error("Произошла ошибка при создании поста:", error);
     }
   };
+
+  getSign = async (id) => {
+    try {
+      const sign = await SignService.requestSignInfo(id);
+      runInAction(() => {
+        this.currentSign = sign;
+      });
+    } catch (error) {
+      console.error("Произошла ошибка при получении инфо о заявке:", error);
+    }
+  }
 }
 
 const signsStore = new Signs();
