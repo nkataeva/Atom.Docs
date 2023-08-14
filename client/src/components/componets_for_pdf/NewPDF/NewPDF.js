@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Document,
   Text,
@@ -21,6 +21,7 @@ import signsStore from "../../../stores/SignStore";
 import { useNavigate } from "react-router-dom";
 import { APPRoute } from "../../../const";
 import userStore from "../../../stores/UserStore";
+import dayjs from "dayjs";
 
 Font.register({
   family: "Roboto",
@@ -38,17 +39,6 @@ const NewPDF = (props) => {
 
   const navigate = useNavigate();
 
-  let formattedDate = "";
-  if (startDate !== null) {
-    formattedDate = startDate
-      ? startDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      })
-      : "";
-  }
-
   const openModal = () => {
     props.setIsOpen(true);
   };
@@ -62,7 +52,10 @@ const NewPDF = (props) => {
       name: props.captionRequest,
       extra: {
         duration: parseInt(textDayCount),
-        dt_start: formattedDate,
+        dt_start:
+          startDate !== null
+            ? dayjs(startDate).format("MM-DD-YYYY")
+            : props.formData.extra.dt_start,
         name_org: textfactory,
         content: content,
         reason: justification,
@@ -72,34 +65,35 @@ const NewPDF = (props) => {
   };
   return (
     <div>
-      {props.visible && <div>
-        {props.captionRequest === "Заявка на информационный обмен" && (
-          <div className="text-field">
-            <input
-              className="text-field__input"
-              type="text"
-              value={textfactory}
-              onChange={(e) => setTextfactory(e.target.value)}
-              placeholder="Адрес организации"
-            />
-            <input
-              className="text-field__input"
-              type="text"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Содержание"
-            />
-            <input
-              className="text-field__input"
-              type="text"
-              value={justification}
-              onChange={(e) => setJustification(e.target.value)}
-              placeholder="Обоснование"
-            />
-          </div>
-        )}
-        {props.captionRequest ===
-          "Заявка для направления в командировку/для направления в служебную поездку" && (
+      {props.visible && (
+        <div>
+          {props.captionRequest === "Заявка на информационный обмен" && (
+            <div className="text-field">
+              <input
+                className="text-field__input"
+                type="text"
+                value={textfactory}
+                onChange={(e) => setTextfactory(e.target.value)}
+                placeholder="Адрес организации"
+              />
+              <input
+                className="text-field__input"
+                type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Содержание"
+              />
+              <input
+                className="text-field__input"
+                type="text"
+                value={justification}
+                onChange={(e) => setJustification(e.target.value)}
+                placeholder="Обоснование"
+              />
+            </div>
+          )}
+          {props.captionRequest ===
+            "Заявка для направления в командировку/для направления в служебную поездку" && (
             <div className="text-field">
               <input
                 className="text-field__input"
@@ -131,50 +125,53 @@ const NewPDF = (props) => {
               />
             </div>
           )}
-        {props.captionRequest === "Заявка на предоставление отпуска" && (
-          <div className="text-field">
-            <DatePicker
-              className="text-field__input"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              placeholderText="Выберите дату"
-            />
-            <input
-              className="text-field__input"
-              type="text"
-              value={textDayCount}
-              onChange={(e) => setTextDayCount(e.target.value)}
-              placeholder="Количество дней"
-            />
-          </div>
-        )}
-        {props.captionRequest === "Заявление на увольнение" && (
-          <div className="text-field">
-            <DatePicker
-              className="text-field__input"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              placeholderText="Выберите дату"
-            />
-            <input
-              className="text-field__input"
-              type="text"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Содержание"
-            />
-          </div>
-        )}
-      </div>}
+          {props.captionRequest === "Заявка на предоставление отпуска" && (
+            <div className="text-field">
+              <DatePicker
+                className="text-field__input"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                placeholderText="Выберите дату"
+              />
+              <input
+                className="text-field__input"
+                type="text"
+                value={textDayCount}
+                onChange={(e) => setTextDayCount(e.target.value)}
+                placeholder="Количество дней"
+              />
+            </div>
+          )}
+          {props.captionRequest === "Заявление на увольнение" && (
+            <div className="text-field">
+              <DatePicker
+                className="text-field__input"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                placeholderText="Выберите дату"
+              />
+              <input
+                className="text-field__input"
+                type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Содержание"
+              />
+            </div>
+          )}
+        </div>
+      )}
 
-      {props.visible && <div className="button-container">
-        <button className="btn" onClick={savePDF}>
-          Сохранить
-        </button>
-        <button className="btn" onClick={openModal}>
-          Предосмотр
-        </button>
-      </div>}
+      {props.visible && (
+        <div className="button-container">
+          <button className="btn" onClick={savePDF}>
+            Сохранить
+          </button>
+          <button className="btn" onClick={openModal}>
+            Предосмотр
+          </button>
+        </div>
+      )}
 
       <div className="pdf-container">
         <Modal
@@ -208,37 +205,37 @@ const NewPDF = (props) => {
                   <View style="container">
                     {props.captionRequest ===
                       "Заявка на информационный обмен" && (
-                        <InfoExchangeBlock
-                          cheif={props.chief}
-                          textfactory={textfactory}
-                          textinput={textinput}
-                          content={content}
-                          justification={justification}
-                          userName={props.userName}
-                        />
-                      )}
+                      <InfoExchangeBlock
+                        cheif={props.chief}
+                        textfactory={textfactory}
+                        textinput={textinput}
+                        content={content}
+                        justification={justification}
+                        userName={props.userName}
+                      />
+                    )}
 
                     {props.captionRequest ===
                       "Заявка для направления в командировку/для направления в служебную поездку" && (
-                        <BusinessTripBlock
-                          cheif={props.chief}
-                          captionFactory={props.captionFactory}
-                          userName={props.userName}
-                          textinput={textinput}
-                          startDate={startDate}
-                          textDayCount={textDayCount}
-                          texttarget={texttarget}
-                        />
-                      )}
+                      <BusinessTripBlock
+                        cheif={props.chief}
+                        captionFactory={props.captionFactory}
+                        userName={props.userName}
+                        textinput={textinput}
+                        startDate={startDate}
+                        textDayCount={textDayCount}
+                        texttarget={texttarget}
+                      />
+                    )}
                     {props.captionRequest ===
                       "Заявка на предоставление отпуска" && (
-                        <VacationBlock
-                          cheif={props.chief}
-                          startDate={startDate}
-                          userName={props.userName}
-                          textDayCount={textDayCount}
-                        />
-                      )}
+                      <VacationBlock
+                        cheif={props.chief}
+                        startDate={startDate}
+                        userName={props.userName}
+                        textDayCount={textDayCount}
+                      />
+                    )}
                     {props.captionRequest === "Заявление на увольнение" && (
                       <ResignationBlock
                         cheif={props.chief}

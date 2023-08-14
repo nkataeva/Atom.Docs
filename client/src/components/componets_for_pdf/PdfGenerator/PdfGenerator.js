@@ -5,6 +5,7 @@ import userStore from "../../../stores/UserStore";
 import { Select } from "antd";
 import { template, templateFormatedData } from "../../../const";
 import { observer } from "mobx-react-lite";
+import dayjs from "dayjs";
 
 const PdfGenerator = observer(({ obj }) => {
   const { getAllUser, user, users } = userStore;
@@ -22,18 +23,14 @@ const PdfGenerator = observer(({ obj }) => {
     id_type: 1,
     name: "",
     extra: {
-      duration: 0,
-      dt_start: "",
+      duration: "",
+      dt_start: dayjs().format("MM-DD-YYYY"),
       name_org: "",
       content: "",
       reason: "",
     },
     signers: [],
   });
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   const handleTypeChange = (value) => {
     setFormData({ ...formData, id_type: parseInt(value) });

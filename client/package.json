@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.8.2",
+    "dayjs": "^1.11.9",
     "fontkit": "^2.0.2",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.3",
