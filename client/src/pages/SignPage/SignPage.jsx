@@ -5,20 +5,29 @@ import { useParams } from 'react-router-dom';
 import signsStore from "../../stores/SignStore";
 import userStore from "../../stores/UserStore";
 import { observer } from "mobx-react-lite";
+import NewPDF from '../../components/componets_for_pdf/NewPDF/NewPDF';
 
 const SignPage = observer(() => {
     const id = useParams()?.id || "";
     useEffect(() => {
         signsStore.getSign(id);
+        userStore.getAllUser();
     }, []);
-    const [datePart, timePart] = signsStore.currentSign?.createdAt.split("T");
-    let status = '';
 
+    const name = userStore.users.find(user => user.id === signsStore.currentSign?.ownerId);
+    const [datePart, timePart] = signsStore.currentSign?.createdAt.split("T");
+    
+    let status = '';
     if (signsStore.currentSign?.status === 0)
         status = 'На рассмотрении';
     else if (signsStore.currentSign?.status === 1)
         status = 'Подписано';
     else status = 'Отклонено';
+
+    const [modalIsOpen, setModalIsOpen] = React.useState(false);
+    const openDoc = () => {
+        setModalIsOpen(true)
+    }
 
     return (
         <div className={styles.form}>
@@ -30,7 +39,7 @@ const SignPage = observer(() => {
             </div>
 
             <div className={styles.block}>
-                <img src={sign} alt="sign" className={styles.icon} />
+                <img src={sign} alt="sign" className={styles.icon} onClick={openDoc}/>
                 <p>{signsStore.currentSign?.id}</p>
             </div>
 
@@ -43,7 +52,16 @@ const SignPage = observer(() => {
                 {signsStore.currentSign?.comment}
             </p>
 
-        </div>
+            <NewPDF visible={false} isOpen={modalIsOpen}
+                setIsOpen={setModalIsOpen}
+                captionRequest={signsStore.currentSign?.name}
+                userName={name?.fio}
+                chief={userStore.user?.fio}
+                captionFactory={signsStore.currentSign?.orgName}
+                content={signsStore.currentSign?.content}
+                justification={signsStore.currentSign?.reason} />
+
+        </div >
     )
 
 })

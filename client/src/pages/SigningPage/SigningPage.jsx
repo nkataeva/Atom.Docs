@@ -74,7 +74,13 @@ const SigningPage = observer(() => {
       </div>
 
       <NewPDF visible={false} isOpen={modalIsOpen}
-        setIsOpen={setModalIsOpen} />
+        setIsOpen={setModalIsOpen}
+        captionRequest={signsStore.currentSign?.name}
+        userName={name?.fio}
+        chief={userStore.user?.fio}
+        captionFactory={signsStore.currentSign?.orgName}
+        content={signsStore.currentSign?.content}
+        justification={signsStore.currentSign?.reason} />
     </div>
   );
 });

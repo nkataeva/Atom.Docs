@@ -38,12 +38,16 @@ const NewPDF = (props) => {
 
   const navigate = useNavigate();
 
-
-  const formattedDate = startDate?.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
+  let formattedDate = "";
+  if (startDate !== null) {
+    formattedDate = startDate
+      ? startDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
+      : "";
+  }
 
   const openModal = () => {
     props.setIsOpen(true);

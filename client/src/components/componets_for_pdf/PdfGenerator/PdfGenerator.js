@@ -81,7 +81,6 @@ const PdfGenerator = observer(({ obj }) => {
           captionFactory={captionFactory}
           content={content}
           justification={justification}
-          status={status}
           visible={true}
           isOpen={modalIsOpen}
           setIsOpen={setModalIsOpen}
