@@ -4,7 +4,7 @@ import NewPDF from "../NewPDF/NewPDF";
 import userStore from "../../../stores/UserStore";
 import { Select } from "antd";
 import { template, templateFormatedData } from "../../../const";
-import {observer} from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 
 const PdfGenerator = observer(({ obj }) => {
   const { getAllUser, user, users } = userStore;
@@ -31,12 +31,17 @@ const PdfGenerator = observer(({ obj }) => {
     signers: [],
   });
 
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   const handleTypeChange = (value) => {
     setFormData({ ...formData, id_type: parseInt(value) });
   };
 
   const handleSignersChange = (value) => {
-    if (value === "all") {
+    console.log(value);
+    if (value.includes("all")) {
       setFormData({
         ...formData,
         signers: users
@@ -44,7 +49,7 @@ const PdfGenerator = observer(({ obj }) => {
           .map((user) => user.id),
       });
     } else {
-      setFormData({ ...formData, signers: [value] });
+      setFormData({ ...formData, signers: value });
     }
   };
 
@@ -77,7 +82,7 @@ const PdfGenerator = observer(({ obj }) => {
         <NewPDF
           captionRequest={templateFormatedData[formData.id_type]}
           userName={user ? user.fio : ""}
-          chief={formData ? formData.name :""}
+          chief={formData ? formData.name : ""}
           captionFactory={captionFactory}
           content={content}
           justification={justification}
