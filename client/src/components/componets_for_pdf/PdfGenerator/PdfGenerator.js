@@ -67,6 +67,7 @@ const PdfGenerator = observer(({ obj }) => {
       <Select
         size="large"
         placeholder="Кому"
+        mode="multiple"
         className={styles.select}
         popupClassName={styles.selectList}
         onChange={handleSignersChange}

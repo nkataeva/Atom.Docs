@@ -20,6 +20,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import signsStore from "../../../stores/SignStore";
 import { useNavigate } from "react-router-dom";
 import { APPRoute } from "../../../const";
+import userStore from "../../../stores/UserStore";
 
 Font.register({
   family: "Roboto",
@@ -51,13 +52,18 @@ const NewPDF = (props) => {
     props.setIsOpen(false);
   };
   const savePDF = () => {
-    props.formData.extra.content = content;
-    props.formData.extra.name_org = textfactory;
-    props.formData.extra.dt_start = formattedDate;
-    props.formData.extra.duration=parseInt(textDayCount);
-    props.formData.extra.reason = justification;
-    props.formData.name = props.captionRequest;
-    signsStore.createSign(props.formData);
+    signsStore.createSign({
+      ...props.formData,
+      id_user: userStore.user.id,
+      name: props.captionRequest,
+      extra: {
+        duration: parseInt(textDayCount),
+        dt_start: formattedDate,
+        name_org: textfactory,
+        content: content,
+        reason: justification,
+      },
+    });
     navigate(APPRoute.MAIN);
   };
   return (

@@ -28,7 +28,7 @@ const Registration = () => {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     createUser(formData); //добавление польз в стор
-    // localStorage.setItem("userAuth", "true");
+    localStorage.setItem("userAuth", "true");
   };
 
   return (

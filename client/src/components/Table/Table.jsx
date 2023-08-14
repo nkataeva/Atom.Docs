@@ -7,8 +7,9 @@ import signing from '../../assets/signing.svg';
 import blueSign from '../../assets/signBlue.svg';
 // import redSign from '../../assets/signRed.svg';
 // import greenSign from '../../assets/signGreen.svg';
+import { observer } from "mobx-react-lite";
 
-const Table = ({ data, sign }) => {
+const Table = observer (({ data, sign }) => {
     const navigate = useNavigate();
 
     const openSign = () => {
@@ -21,23 +22,22 @@ const Table = ({ data, sign }) => {
             <table>
                 <thead>
                     <tr>
-                        <th>{!sign &&
+                        {!sign && <th>
                             <img src={newSign} alt="Signing" onClick={() => navigate(APPRoute.CREATURE)} />
-                        }</th>
+                        </th>}
                         <th>Номер заявки</th>
                         <th>Имя отправителя</th>
                         <th>Название</th>
                         <th>Дата</th>
-                        <th>Тип заявки</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((row, index) => (
                         <tr key={index}>
-                            <td className={styles.sign}>
+                            {!sign && <td className={styles.sign}>
                                 <img src={blueSign} alt="sign" onClick={openSign} />
-                            </td>
+                            </td>}
                             {Object.values(row).map((value, innerIndex) => (
                                 <td key={innerIndex}>{value}</td>
                             ))}
@@ -53,7 +53,7 @@ const Table = ({ data, sign }) => {
             </table>
         </div>
     )
-}
+})
 
 Table.defaultProps = {
     sign: false,
